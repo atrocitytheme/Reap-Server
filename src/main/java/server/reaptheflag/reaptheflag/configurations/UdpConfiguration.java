@@ -11,6 +11,7 @@ import server.reaptheflag.reaptheflag.renderserver.UdpStarter;
 
 @Configuration
 public class UdpConfiguration {
+    private static int port = 9956;
     @Bean
     public TaskExecutor UdpBeanExecutor() {
         return new SimpleAsyncTaskExecutor();
@@ -19,7 +20,7 @@ public class UdpConfiguration {
     @Bean
     public CommandLineRunner scheduleTheUdp(TaskExecutor UdpBeanExecutor) {
         return (String... args) -> {
-            UdpBeanExecutor.execute(new UdpStarter(9000));
+            UdpBeanExecutor.execute(new UdpStarter(port));
         };
     }
 }

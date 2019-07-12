@@ -1,7 +1,10 @@
 package server.reaptheflag.reaptheflag.renderserver;
 
 import server.reaptheflag.reaptheflag.service.NetworkConditionChecker;
-
+/**
+ * @see NetworkConditionChecker
+ * udp server starter, with networkchecker involved
+ * */
 public class UdpStarter implements Runnable{
     private int port;
 

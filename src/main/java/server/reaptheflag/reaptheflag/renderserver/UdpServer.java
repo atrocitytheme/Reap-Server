@@ -1,13 +1,13 @@
 package server.reaptheflag.reaptheflag.renderserver;
-
+/**
+ * server initialization, use SO_BROADCAST udp channel
+ * */
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.handler.codec.DatagramPacketDecoder;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import server.reaptheflag.reaptheflag.renderserver.configuration.PacketHandler;
 
 import java.net.InetAddress;
@@ -33,7 +33,8 @@ public class UdpServer {
                 });
 
         InetAddress address = InetAddress.getLocalHost();
-        System.out.println("udp server initialized!");
+        System.out.println("udp server initialized!" + address);
         programBootStrap.bind(address, port).sync().channel().closeFuture().await();
+        System.out.println("passed!");
     }
 }
