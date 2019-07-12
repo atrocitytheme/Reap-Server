@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeController {
     @RequestMapping("/")
     public String indexPage() {
-            return "Welcome to the game server";
-            }
+        System.out.println(System.getProperty("java.class.path"));
+        return "Welcome to the game server";
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/plain")
     public String loginCheck(HttpServletResponse res) {
-            res.setStatus(200);
-            return "congratulations!";
+        res.setStatus(200);
+        return "congratulations!";
     }
 }
