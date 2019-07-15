@@ -1,6 +1,6 @@
-package server.reaptheflag.reaptheflag.renderserver.transferer.impl;
+package server.reaptheflag.reaptheflag.renderserver.validator.impl;
 
-import server.reaptheflag.reaptheflag.renderserver.transferer.TokenValidator;
+import server.reaptheflag.reaptheflag.renderserver.validator.TokenValidator;
 /**
  * TODO: Finish the verification token procedure
  * */

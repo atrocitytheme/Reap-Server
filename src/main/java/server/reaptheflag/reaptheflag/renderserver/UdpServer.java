@@ -8,18 +8,19 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
-import io.netty.handler.codec.DatagramPacketDecoder;
-import io.netty.handler.codec.protobuf.ProtobufDecoder;
-import io.netty.handler.logging.LogLevel;
-import io.netty.handler.logging.LoggingHandler;
-import server.reaptheflag.reaptheflag.renderserver.configuration.PacketHandler;
+import io.netty.handler.codec.bytes.ByteArrayDecoder;
+import io.netty.handler.codec.bytes.ByteArrayEncoder;
+import org.springframework.context.ApplicationContext;
+import server.reaptheflag.reaptheflag.renderserver.Handler.PacketHandler;
 
 import java.net.InetAddress;
 
 public class UdpServer {
+    private ApplicationContext context;
     private int port;
-    public UdpServer(int port) {
+    public UdpServer(int port, ApplicationContext context) {
         this.port = port;
+        this.context = context;
     }
     public void run() throws Exception {
         final NioEventLoopGroup group = new NioEventLoopGroup();
@@ -33,7 +34,9 @@ public class UdpServer {
                     protected void initChannel(NioDatagramChannel nioDatagramChannel) throws Exception {
                         System.out.println("initialized!");
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
-                        pipe.addLast(new PacketHandler());
+                        pipe.addLast("decoder", new ByteArrayDecoder());
+                        pipe.addLast("encoder", new ByteArrayEncoder());
+                        pipe.addLast("clientHandler", (PacketHandler) context.getBean("basicPacketHandler"));
                     }
                 }); // packet handler is the bootstrap of the processing program
 
