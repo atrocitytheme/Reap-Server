@@ -8,6 +8,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
+import io.netty.handler.codec.DatagramPacketDecoder;
+import io.netty.handler.codec.protobuf.ProtobufDecoder;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import server.reaptheflag.reaptheflag.renderserver.configuration.PacketHandler;
 
 import java.net.InetAddress;
@@ -27,14 +31,14 @@ public class UdpServer {
 
                     @Override
                     protected void initChannel(NioDatagramChannel nioDatagramChannel) throws Exception {
+                        System.out.println("initialized!");
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast(new PacketHandler());
                     }
-                });
+                }); // packet handler is the bootstrap of the processing program
 
         InetAddress address = InetAddress.getLocalHost();
         System.out.println("udp server initialized!" + address);
         programBootStrap.bind(address, port).sync().channel().closeFuture().await();
-        System.out.println("passed!");
     }
 }
