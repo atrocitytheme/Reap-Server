@@ -10,12 +10,15 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 import io.netty.handler.codec.bytes.ByteArrayDecoder;
 import io.netty.handler.codec.bytes.ByteArrayEncoder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import server.reaptheflag.reaptheflag.renderserver.Handler.PacketHandler;
 
 import java.net.InetAddress;
 
 public class UdpServer {
+    private static Logger LOGGER = LogManager.getLogger(UdpServer.class);
     private ApplicationContext context;
     private int port;
     public UdpServer(int port, ApplicationContext context) {
@@ -32,7 +35,6 @@ public class UdpServer {
 
                     @Override
                     protected void initChannel(NioDatagramChannel nioDatagramChannel) throws Exception {
-                        System.out.println("initialized!");
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast("decoder", new ByteArrayDecoder());
                         pipe.addLast("encoder", new ByteArrayEncoder());
@@ -41,7 +43,7 @@ public class UdpServer {
                 }); // packet handler is the bootstrap of the processing program
 
         InetAddress address = InetAddress.getLocalHost();
-        System.out.println("udp server initialized!" + address);
+        LOGGER.info("udp server initialized!" + address);
         programBootStrap.bind(address, port).sync().channel().closeFuture().await();
     }
 }

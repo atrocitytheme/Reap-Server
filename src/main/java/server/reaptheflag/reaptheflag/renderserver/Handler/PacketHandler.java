@@ -27,6 +27,7 @@ public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPac
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) throws Exception {
+        // TODO: solve the packet format
         dispatcher.handle(this, datagramPacket);
         final ByteBuf buf = Unpooled.wrappedBuffer(datagramPacket.content());
         final int length = buf.readableBytes();
@@ -34,6 +35,7 @@ public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPac
         buf.readBytes(receiveBuf);
         LOGGER.info("connection recieved in " + DateToolUtil.logCurrentDate());
         System.out.println(convertToString(receiveBuf));
+        System.out.println(receiveBuf[0]);
     }
 
     @Autowired
