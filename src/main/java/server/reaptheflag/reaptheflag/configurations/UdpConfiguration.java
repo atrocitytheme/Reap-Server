@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
-import server.reaptheflag.reaptheflag.renderserver.UdpStarter;
+import server.reaptheflag.reaptheflag.udpserver.UdpStarter;
 
 @Configuration
 public class UdpConfiguration {
