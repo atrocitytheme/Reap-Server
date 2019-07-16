@@ -27,7 +27,8 @@ public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPac
         DataPacket packet = DataPacket.wrap(datagramPacket);
         dispatcher.dispatch(this, new Client(packet));
         String data = packet.readString();
-        LOGGER.info("the current received data is: " + data + "at: " + DateToolUtil.logCurrentDate());
+        LOGGER.info("the current received data is: " + data + "\nat: " + DateToolUtil.logCurrentDate());
+        LOGGER.info("the length of the data is: " + packet.getLength() + "bytes");
     }
 
     @Autowired

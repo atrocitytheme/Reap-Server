@@ -18,7 +18,8 @@ public class Client implements NetworkUser{
 
     @Override
     public String toString() {
-        return String.format("");
+        return String.format("the client command type is: %d \n" +
+                                "the client ip is: %s\n", commandType(), getIp());
     }
 
     @Override

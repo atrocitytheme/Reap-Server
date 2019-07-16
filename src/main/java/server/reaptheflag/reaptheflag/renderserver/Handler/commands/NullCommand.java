@@ -1,7 +1,9 @@
 package server.reaptheflag.reaptheflag.renderserver.Handler.commands;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.renderserver.dispatcher.marker.CommandType;
-import server.reaptheflag.reaptheflag.renderserver.network.Client;
+import server.reaptheflag.reaptheflag.renderserver.network.NetworkUser;
 
 /**
  * This is a command of invalid usage
@@ -10,8 +12,10 @@ import server.reaptheflag.reaptheflag.renderserver.network.Client;
 @CommandType
 public class NullCommand implements Command{
 
+    private static Logger LOGGER = LogManager.getLogger(NullCommand.class);
+
     @Override
-    public void execute(Client client) {
-        System.out.println(client);
+    public void execute(NetworkUser client) {
+        LOGGER.info(client);
     }
 }

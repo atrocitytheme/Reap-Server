@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.util.DateToolUtil;
 
-public abstract class OnlinePlayer extends Alive{
+public class OnlinePlayer extends Alive{
     protected String ip;
     protected boolean disConnected;
     protected int id;

@@ -12,5 +12,4 @@ public class ReaptheflagApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }

@@ -30,7 +30,7 @@ public class DataWrapper {
 
     public byte[] getBytes() {
         byte[] src = new byte[data.readableBytes()];
-        data.readBytes(src);
+        data.copy().readBytes(src);
         return src;
     }
 
@@ -54,5 +54,9 @@ public class DataWrapper {
     @Override
     public String toString() {
         return String.format("");
+    }
+
+    public int length() {
+        return data.readableBytes();
     }
 }

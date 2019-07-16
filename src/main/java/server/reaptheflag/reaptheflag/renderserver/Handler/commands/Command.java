@@ -1,7 +1,7 @@
 package server.reaptheflag.reaptheflag.renderserver.Handler.commands;
 
-import server.reaptheflag.reaptheflag.renderserver.network.Client;
+import server.reaptheflag.reaptheflag.renderserver.network.NetworkUser;
 
 public interface Command {
-    void execute(Client client);
+    void execute(NetworkUser client);
 }

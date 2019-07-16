@@ -33,4 +33,8 @@ public class DataPacket {
     public int getCommandType() {
         return 0;
     }
+
+    public int getLength() {
+        return DataWrapper.wrap(rawData).setReadableOffset(offset).length();
+    }
 }
