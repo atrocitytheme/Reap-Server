@@ -11,6 +11,5 @@ public class World {
     }
 
     public void update() {
-        playres.removeIf((d) -> d.isDisConnected());
     }
 }

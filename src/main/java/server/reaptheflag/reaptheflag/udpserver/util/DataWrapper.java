@@ -6,7 +6,7 @@ import io.netty.channel.socket.DatagramPacket;
 
 import java.nio.charset.StandardCharsets;
 /**
- * wrap the buf with bigedaian style
+ * tool to wrap the buf with bigedaian style and process it into valid format
  * */
 public class DataWrapper {
     private ByteBuf data;

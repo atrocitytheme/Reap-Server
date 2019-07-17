@@ -12,8 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.udpserver.dispatcher.Dispatchable;
-import server.reaptheflag.reaptheflag.udpserver.network.Client;
-import server.reaptheflag.reaptheflag.udpserver.network.receivable.DataPacket;
+import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
+import server.reaptheflag.reaptheflag.udpserver.network.receivable.PlayerDataPacket;
+import server.reaptheflag.reaptheflag.udpserver.validator.TokenValidator;
 import server.reaptheflag.reaptheflag.util.DateToolUtil;
 
 @Service("basicPacketHandler")
@@ -21,20 +22,32 @@ public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPac
 
     private static final Logger LOGGER = LogManager.getLogger();
     private Dispatchable dispatcher;
+    private TokenValidator validator;
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) {
 
-        DataPacket packet = DataPacket.wrap(datagramPacket);
+        PlayerDataPacket packet = PlayerDataPacket.wrap(datagramPacket);
         String data = packet.readString();
-        LOGGER.info("the current received data is: " + data + "\nat: " + DateToolUtil.logCurrentDate());
+        LOGGER.info("the current received data is:" + data + "\nat: " + DateToolUtil.logCurrentDate());
         LOGGER.info("the length of the data is: " + packet.getLength() + "bytes");
-        dispatcher.dispatch(this, new Client(packet));
+        LOGGER.info("the length of json is: " + data.length());
+        UdpClient udpClient = new UdpClient(packet);
+        if (!validator.isValidData(udpClient)) {
+            LOGGER.info("user: " + udpClient.getName() + " is trying to send invalid data ::: intercepted");
+            return;
+        }
+        dispatcher.dispatch(this, udpClient);
     }
 
     @Autowired
     @Qualifier(value = "commandDispatcher")
     public void setDispatcher(Dispatchable dispatcher) {
         this.dispatcher = dispatcher;
+    }
+
+    @Autowired
+    public void setValidator(TokenValidator validator) {
+        this.validator = validator;
     }
 }

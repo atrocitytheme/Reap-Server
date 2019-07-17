@@ -1,5 +1,6 @@
 package server.reaptheflag.reaptheflag.udpserver.Handler.commands;
 
+import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
 
 /**
@@ -8,5 +9,6 @@ import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
 public class PlayerMoveCommand implements Command{
     @Override
     public void execute(NetworkUser client) {
+        UdpClient onlinePlayreConnction = (UdpClient) client;
     }
 }

@@ -3,14 +3,17 @@ package server.reaptheflag.reaptheflag.udpserver.model;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class Alive {
-    protected AtomicInteger life;
-    protected AtomicInteger speed;
-    protected boolean isDead = false;
+    AtomicInteger life;
+    boolean isDead = false;
 
     public void setLife(int life) {
         if (getLife() <= 0) {
             die();
             isDead = true;
+        }
+
+        else {
+            this.life.set(life);
         }
     }
 

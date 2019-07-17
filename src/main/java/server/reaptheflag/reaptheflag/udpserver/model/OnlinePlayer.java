@@ -6,9 +6,9 @@ import server.reaptheflag.reaptheflag.util.DateToolUtil;
 
 public class OnlinePlayer extends Alive{
     protected String ip;
-    protected boolean disConnected;
-    protected int id;
-    protected float timeout; // player disconnects if the timeout consumed
+    boolean disConnected;
+    int id;
+    float timeout; // player disconnects if the timeout consumed
     private static final Logger LOGGER = LogManager.getLogger(OnlinePlayer.class);
 
     @Override
@@ -28,11 +28,31 @@ public class OnlinePlayer extends Alive{
         return disConnected;
     }
 
-    public void connected(boolean disconnected) {
-        this.disConnected = disconnected;
+    public String getIp() {
+        return ip;
     }
 
-    protected float showTimeout() {
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public void setDisConnected(boolean disConnected) {
+        this.disConnected = disConnected;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public float getTimeout() {
         return timeout;
+    }
+
+    public void setTimeout(float timeout) {
+        this.timeout = timeout;
     }
 }

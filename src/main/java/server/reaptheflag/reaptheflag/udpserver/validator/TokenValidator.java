@@ -1,15 +1,20 @@
 package server.reaptheflag.reaptheflag.udpserver.validator;
 
-import server.reaptheflag.reaptheflag.udpserver.model.Validatable;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
+import server.reaptheflag.reaptheflag.udpserver.network.receivable.PlayerDataPacket;
 
 /**
  * This module is mainly used for token validation procedure, it parses the encoding value of the client,
  * check if the client meets the requirement or if the data is valid.
  * */
-public interface TokenValidator {
-    boolean validateToken(String token);
-
-    default boolean isValidData(Validatable source) {
-        return source.isVaildData();
+public abstract class TokenValidator {
+    protected static Logger LOGGER = LogManager.getLogger();
+    public boolean isValidData(UdpClient udpClient) {
+        PlayerDataPacket packet = udpClient.getNetworkPacket();
+        boolean res = packet.isFormatValid();
+        if (!res) LOGGER.info("invalid format reveived in udp server");
+        return res;
     }
 }
