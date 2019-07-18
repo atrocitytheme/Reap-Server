@@ -8,8 +8,10 @@ public abstract class NetworkUser {
     public abstract int commandType();
     public abstract String getIp();
     public abstract String getName();
-    public abstract void broadcast(SendableData data);
     public abstract String getToken();
+    public abstract int getRoom();
+    public abstract int getPort();
+    public abstract void disconnect();
 
     @Override
     public boolean equals(Object obj) {

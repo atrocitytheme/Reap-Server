@@ -3,8 +3,6 @@ package server.reaptheflag.reaptheflag.udpserver.network.receivable.parser;
 import com.google.gson.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.udpserver.network.receivable.parser.DataFormatParser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class JsonFormatParser<E> extends DataFormatParser <String>{
             return 0;
         }
         JsonElement ele = getGsonElementByName(name, structure);
-        return ele == null ? 0 : ele.getAsInt();
+        return ele == null ? -1 : ele.getAsInt();
     }
 
     @Override

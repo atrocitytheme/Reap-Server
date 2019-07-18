@@ -33,8 +33,13 @@ public class UdpStarter implements Runnable{
             udpServer.run();
         } catch (Exception e) {
             LOGGER.info("udp server initialization failed!\n");
-            e.printStackTrace();
+            LOGGER.error(e);
             validator.setUdpCondition(false);
         }
+    }
+
+    @Autowired
+    public void setUdpServer(UdpServer udpServer) {
+        this.udpServer = udpServer;
     }
 }

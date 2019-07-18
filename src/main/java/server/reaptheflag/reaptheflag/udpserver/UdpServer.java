@@ -13,8 +13,7 @@ import io.netty.handler.codec.bytes.ByteArrayEncoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import server.reaptheflag.reaptheflag.udpserver.dispatcher.PacketHandler;
+import server.reaptheflag.reaptheflag.udpserver.dispatcher.PacketDispatcher;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 
 import java.net.InetAddress;
@@ -23,7 +22,7 @@ public class UdpServer {
     private static Logger LOGGER = LogManager.getLogger(UdpServer.class);
     private int port;
     @Autowired
-    private PacketHandler handler;
+    private PacketDispatcher handler;
     @Autowired
     private NetworkSpace space1; // the network space of the room
     public UdpServer(int port) {

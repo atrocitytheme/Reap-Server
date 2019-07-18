@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
-import server.reaptheflag.reaptheflag.udpserver.network.receivable.PlayerDataPacket;
+import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdpDataPacket;
 import server.reaptheflag.reaptheflag.udpserver.validator.TokenValidator;
 import server.reaptheflag.reaptheflag.util.DateToolUtil;
 
 @Service
-public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPacket> {
+public final class PacketDispatcher extends SimpleChannelInboundHandler<DatagramPacket> {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private Dispatchable dispatcher;
@@ -26,7 +26,7 @@ public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPac
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, DatagramPacket datagramPacket) {
 
-        PlayerDataPacket packet = PlayerDataPacket.wrap(datagramPacket);
+        ReceivableUdpDataPacket packet = ReceivableUdpDataPacket.wrap(datagramPacket);
         String data = packet.readString();
         LOGGER.info("the current received data is:" + data + "\nat: " + DateToolUtil.logCurrentDate());
         LOGGER.info("the length of the data is: " + packet.getLength() + "bytes");

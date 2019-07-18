@@ -1,16 +1,15 @@
 package server.reaptheflag.reaptheflag.udpserver.network;
 
-import server.reaptheflag.reaptheflag.udpserver.network.receivable.PlayerDataPacket;
-import server.reaptheflag.reaptheflag.udpserver.network.sendable.SendableData;
+import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdpDataPacket;
 
 /**
  * UdpClient is the alias for the online player connection
  * */
 public class UdpClient extends NetworkUser{
-    private PlayerDataPacket packet;
+    private ReceivableUdpDataPacket packet;
     private double timeout;
     private boolean disconnected = false;
-    public UdpClient(PlayerDataPacket packet) {
+    public UdpClient(ReceivableUdpDataPacket packet) {
         this.packet = packet;
         packet.loadContent();
     }
@@ -37,15 +36,18 @@ public class UdpClient extends NetworkUser{
     }
 
     @Override
+    public int getPort() {
+        int port = packet.content().getIntByName("Port");
+        return port == 0 ? 5000 : port;
+    }
+    @Override
+    public int getRoom() {
+        return packet.content().getIntByName("RoomId");
+    }
+
+    @Override
     public String getName() {
         return packet.content().getAttributeByName("Name");
-    }
-    /**
-     * TODO: broadcast to this client
-     * */
-    @Override
-    public void broadcast(SendableData data) {
-
     }
 
     public double getTimeout() {
@@ -56,7 +58,7 @@ public class UdpClient extends NetworkUser{
         this.timeout = timeout;
     }
 
-    public PlayerDataPacket getNetworkPacket() {
+    public ReceivableUdpDataPacket getNetworkPacket() {
         return packet;
     }
 
@@ -64,6 +66,7 @@ public class UdpClient extends NetworkUser{
         timeout -= 1;
     }
 
+    @Override
     public void disconnect() {
         disconnected = true;
     }
