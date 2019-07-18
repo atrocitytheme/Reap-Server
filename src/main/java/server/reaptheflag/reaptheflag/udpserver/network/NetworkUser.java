@@ -16,6 +16,7 @@ public abstract class NetworkUser {
     public abstract String getToken(); // null for default
     public abstract int getRoom(); // -1 for default
     public abstract int getPort(); // 5000 for default
+    public abstract int getId(); // default is -1
 
     @Override
     public boolean equals(Object obj) {

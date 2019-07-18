@@ -44,4 +44,8 @@ public class NetworkRoom {
         LOGGER.info("player : " + user + " has been spawned!");
         update(user, model);
     }
+
+    public OnlineObject get(NetworkUser user) {
+        return data.get(user);
+    }
 }

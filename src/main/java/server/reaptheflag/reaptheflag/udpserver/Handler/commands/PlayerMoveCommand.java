@@ -18,6 +18,7 @@ public class PlayerMoveCommand implements Command{
     public void execute(NetworkUser client, NetworkSpace space) {
         LOGGER.info("playermove command exceeds!");
         NetworkLocationUser user = new NetworkLocationUser((UdpClientUser) client);
+
         OnlinePlayer model = user.generateModel();
         NetworkRoom room = space.getRoom(user.getRoom());
 

@@ -33,6 +33,12 @@ public class UdpClientUser extends NetworkUser{
         int port = packet.content().getIntByName("Port");
         return port == 0 ? 5000 : port;
     }
+
+    @Override
+    public int getId() {
+        return this.packet.content().getIntByName("Id");
+    }
+
     @Override
     public int getRoom() {
         return packet.content().getIntByName("RoomId");
