@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.udpserver.Handler;
+package server.reaptheflag.reaptheflag.udpserver.dispatcher;
 /***
  * bootstrap event handler
  * components: eventTrigger layer, dispatcher layer, eventhandler lauyer, validation layer
@@ -11,13 +11,12 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import server.reaptheflag.reaptheflag.udpserver.dispatcher.Dispatchable;
 import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
 import server.reaptheflag.reaptheflag.udpserver.network.receivable.PlayerDataPacket;
 import server.reaptheflag.reaptheflag.udpserver.validator.TokenValidator;
 import server.reaptheflag.reaptheflag.util.DateToolUtil;
 
-@Service("basicPacketHandler")
+@Service
 public final class PacketHandler extends SimpleChannelInboundHandler<DatagramPacket> {
 
     private static final Logger LOGGER = LogManager.getLogger();

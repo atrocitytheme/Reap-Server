@@ -6,8 +6,10 @@ import server.reaptheflag.reaptheflag.udpserver.network.sendable.SendableData;
 /**
  * UdpClient is the alias for the online player connection
  * */
-public class UdpClient implements NetworkUser{
+public class UdpClient extends NetworkUser{
     private PlayerDataPacket packet;
+    private double timeout;
+    private boolean disconnected = false;
     public UdpClient(PlayerDataPacket packet) {
         this.packet = packet;
         packet.loadContent();
@@ -46,7 +48,27 @@ public class UdpClient implements NetworkUser{
 
     }
 
+    public double getTimeout() {
+        return timeout;
+    }
+
+    public void setTimeout(double timeout) {
+        this.timeout = timeout;
+    }
+
     public PlayerDataPacket getNetworkPacket() {
         return packet;
+    }
+
+    public void decrementTimeout() {
+        timeout -= 1;
+    }
+
+    public void disconnect() {
+        disconnected = true;
+    }
+
+    public boolean isDisconnected() {
+        return disconnected;
     }
 }

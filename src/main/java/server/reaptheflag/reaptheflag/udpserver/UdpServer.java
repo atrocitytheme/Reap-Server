@@ -12,19 +12,24 @@ import io.netty.handler.codec.bytes.ByteArrayDecoder;
 import io.netty.handler.codec.bytes.ByteArrayEncoder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import server.reaptheflag.reaptheflag.udpserver.Handler.PacketHandler;
+import server.reaptheflag.reaptheflag.udpserver.dispatcher.PacketHandler;
+import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 
 import java.net.InetAddress;
 
 public class UdpServer {
     private static Logger LOGGER = LogManager.getLogger(UdpServer.class);
-    private ApplicationContext context;
     private int port;
-    public UdpServer(int port, ApplicationContext context) {
+    @Autowired
+    private PacketHandler handler;
+    @Autowired
+    private NetworkSpace space1; // the network space of the room
+    public UdpServer(int port) {
         this.port = port;
-        this.context = context;
     }
+
     public void run() throws Exception {
         final NioEventLoopGroup group = new NioEventLoopGroup();
         final Bootstrap programBootStrap = new Bootstrap();
@@ -35,10 +40,11 @@ public class UdpServer {
 
                     @Override
                     protected void initChannel(NioDatagramChannel nioDatagramChannel) throws Exception {
+                        space1.allocateRoom();
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast("decoder", new ByteArrayDecoder());
                         pipe.addLast("encoder", new ByteArrayEncoder());
-                        pipe.addLast("clientHandler", (PacketHandler) context.getBean("basicPacketHandler"));
+                        pipe.addLast("clientHandler", handler);
                     }
                 }); // packet handler is the bootstrap of the processing program
 

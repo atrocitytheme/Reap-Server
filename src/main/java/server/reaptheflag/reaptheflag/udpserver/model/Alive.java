@@ -1,25 +1,22 @@
 package server.reaptheflag.reaptheflag.udpserver.model;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
-public abstract class Alive {
-    AtomicInteger life;
+public class Alive extends OnlineObject {
+    int life;
     boolean isDead = false;
 
-    public void setLife(int life) {
-        if (getLife() <= 0) {
-            die();
-            isDead = true;
-        }
-
-        else {
-            this.life.set(life);
-        }
-    }
-
     public int getLife() {
-        return life.get(); // only rough values can be got
+        return life;
     }
 
-    public abstract void die();
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public boolean isDead() {
+        return isDead;
+    }
+
+    public void setDead(boolean dead) {
+        isDead = dead;
+    }
 }

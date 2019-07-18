@@ -8,7 +8,7 @@ import server.reaptheflag.reaptheflag.udpserver.dispatcher.Dispatchable;
 @Configuration
 public class DispatcherConfigurator {
     @Bean(name = "commandDispatcher")
-    public Dispatchable dispatchEvent() {
+    public CommandEventDispatcher dispatchEvent() {
         return new CommandEventDispatcher();
     }
 }

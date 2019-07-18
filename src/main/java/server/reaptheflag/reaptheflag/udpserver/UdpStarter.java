@@ -4,35 +4,36 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import server.reaptheflag.reaptheflag.service.NetworkConditionChecker;
 /**
  * @see NetworkConditionChecker
  * udp server starter, with networkchecker involved
  * */
+
 public class UdpStarter implements Runnable{
-    private int port;
-    private ApplicationContext context;
     private Logger LOGGER = LogManager.getLogger(UdpStarter.class);
 
+    private UdpServer udpServer;
     @Autowired
     public void setNetworkConditionChecker(NetworkConditionChecker networkConditionChecker) {
         this.networkConditionChecker = networkConditionChecker;
     }
 
-    private NetworkConditionChecker networkConditionChecker;
-    public UdpStarter(int port, ApplicationContext context) {
-        this.port = port;
-        this.context = context;
+    public UdpStarter(UdpServer server) {
+        this.udpServer = server;
     }
 
+    private NetworkConditionChecker networkConditionChecker;
 
     @Override
     public void run() {
         NetworkConditionChecker validator = networkConditionChecker;
         try {
-            new UdpServer(port, context).run();
+            udpServer.run();
         } catch (Exception e) {
-            LOGGER.info("udp server initialization failed!");
+            LOGGER.info("udp server initialization failed!\n");
+            e.printStackTrace();
             validator.setUdpCondition(false);
         }
     }

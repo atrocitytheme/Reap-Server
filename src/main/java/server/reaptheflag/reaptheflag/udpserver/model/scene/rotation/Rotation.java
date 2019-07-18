@@ -1,4 +1,7 @@
 package server.reaptheflag.reaptheflag.udpserver.model.scene.rotation;
 
-public class Rotation {
+import javax.vecmath.Point3d;
+
+public class Rotation extends Point3d {
+
 }
