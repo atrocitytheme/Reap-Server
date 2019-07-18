@@ -40,6 +40,7 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
         InetAddress address = null;
         try {
             address = InetAddress.getByName(client.getIp());
+            LOGGER.info("sent to address succeeds! " + client.getIp());
         } catch (UnknownHostException e) {
             LOGGER.info("data sending stopped for: " + client);
             space.disconnect(client);
