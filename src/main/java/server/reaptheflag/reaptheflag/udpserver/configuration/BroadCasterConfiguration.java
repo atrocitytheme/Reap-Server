@@ -15,6 +15,7 @@ public class BroadCasterConfiguration {
     // frame synchronization
     @Scheduled(cron = "0/2 * * * * *")
     public void frameworkUpdate() {
+        space.update();
         machine1.broadCast(space);
     }
 

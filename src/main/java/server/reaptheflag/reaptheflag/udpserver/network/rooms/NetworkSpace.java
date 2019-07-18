@@ -36,9 +36,10 @@ public class NetworkSpace {
     }
 
     /**
-     * broadcast in every frame
+     * broadcast in every frame, eheck the connection and disable all disconnected
      */
     public void update() {
+
     }
 
     public void disconnect(NetworkUser user) {

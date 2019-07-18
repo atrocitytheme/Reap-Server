@@ -6,6 +6,7 @@ package server.reaptheflag.reaptheflag.udpserver.dispatcher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import server.reaptheflag.reaptheflag.udpserver.Handler.commands.Command;
 import server.reaptheflag.reaptheflag.udpserver.Handler.commands.NullCommand;
 import server.reaptheflag.reaptheflag.udpserver.Handler.commands.PlayerMoveCommand;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
@@ -14,22 +15,20 @@ import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 public class CommandEventDispatcher implements Dispatchable{
 
     private NetworkSpace space1;
-    private Logger LOGGRE = LogManager.getLogger(CommandEventDispatcher.class);
+
+    private CommandDispatchHelper helper;
     public void dispatch(PacketDispatcher handler, NetworkUser client) {
-        LOGGRE.info("the current packet command is: " + client.commandType());
-
-        //TODO: add different life condition
-        if (client.commandType() == -1) {
-            new NullCommand().execute(client, space1.getRoom(0));
-        }
-
-        else if (client.commandType() == 1) {
-            new PlayerMoveCommand().execute(client, space1.getRoom(0));
-        }
+        Command command = helper.takeCommand(client, space1);
+        command.execute(client, space1);
     }
 
     @Autowired
-    public void setSpace(NetworkSpace space) {
-        this.space1 = space;
+    public void setSpace1(NetworkSpace space1) {
+        this.space1 = space1;
+    }
+
+    @Autowired
+    public void setHelper(CommandDispatchHelper helper) {
+        this.helper = helper;
     }
 }

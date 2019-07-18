@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 import server.reaptheflag.reaptheflag.udpserver.network.sendable.SendableData;
+import server.reaptheflag.reaptheflag.udpserver.network.sendable.SentDataPacketUdp;
 
 import java.io.IOException;
 import java.net.*;
@@ -34,13 +35,14 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
             space.disconnect(client);
             return;
         }
+        LOGGER.info("the sent data is: " + ((SentDataPacketUdp) data).deserilize());
         byte[] sent = data.getBytes();
         InetAddress address = null;
         try {
             address = InetAddress.getByName(client.getIp());
         } catch (UnknownHostException e) {
-            LOGGER.error(e);
             LOGGER.info("data sending stopped for: " + client);
+            space.disconnect(client);
             return;
         }
         DatagramPacket packet = new DatagramPacket(sent, sent.length, address, client.getPort());

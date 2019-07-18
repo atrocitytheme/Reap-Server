@@ -3,38 +3,30 @@ package server.reaptheflag.reaptheflag.udpserver.network;
 import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdpDataPacket;
 
 /**
- * UdpClient is the alias for the online player connection
+ * UdpClientUser is the alias for the online player connection
  * */
-public class UdpClient extends NetworkUser{
+public class UdpClientUser extends NetworkUser{
     private ReceivableUdpDataPacket packet;
-    private double timeout;
-    private boolean disconnected = false;
-    public UdpClient(ReceivableUdpDataPacket packet) {
+    public UdpClientUser(ReceivableUdpDataPacket packet) {
         this.packet = packet;
-        packet.loadContent();
     }
-
     @Override
     public int commandType() {
         return packet.content().getIntByName("CommandType");
     }
-
     @Override
     public String getIp() {
         return packet.content().getAttributeByName("Ip");
     }
-
     @Override
     public String getToken() {
         return packet.content().getAttributeByName("Token");
     }
-
     @Override
     public String toString() {
         return String.format("the client command type is: %d \n" +
                                 "the client ip is: %s\n", commandType(), getIp());
     }
-
     @Override
     public int getPort() {
         int port = packet.content().getIntByName("Port");
@@ -44,34 +36,11 @@ public class UdpClient extends NetworkUser{
     public int getRoom() {
         return packet.content().getIntByName("RoomId");
     }
-
     @Override
     public String getName() {
         return packet.content().getAttributeByName("Name");
     }
-
-    public double getTimeout() {
-        return timeout;
-    }
-
-    public void setTimeout(double timeout) {
-        this.timeout = timeout;
-    }
-
     public ReceivableUdpDataPacket getNetworkPacket() {
         return packet;
-    }
-
-    public void decrementTimeout() {
-        timeout -= 1;
-    }
-
-    @Override
-    public void disconnect() {
-        disconnected = true;
-    }
-
-    public boolean isDisconnected() {
-        return disconnected;
     }
 }

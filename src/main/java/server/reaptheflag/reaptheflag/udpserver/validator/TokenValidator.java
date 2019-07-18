@@ -2,7 +2,7 @@ package server.reaptheflag.reaptheflag.udpserver.validator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
+import server.reaptheflag.reaptheflag.udpserver.network.UdpClientUser;
 import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdpDataPacket;
 
 /**
@@ -11,8 +11,8 @@ import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdp
  * */
 public abstract class TokenValidator {
     protected static Logger LOGGER = LogManager.getLogger();
-    public boolean isValidData(UdpClient udpClient) {
-        ReceivableUdpDataPacket packet = udpClient.getNetworkPacket();
+    public boolean isValidData(UdpClientUser udpClientUser) {
+        ReceivableUdpDataPacket packet = udpClientUser.getNetworkPacket();
         boolean res = packet.isFormatValid();
         if (!res) LOGGER.info("invalid format reveived in udp server");
         return res;

@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import server.reaptheflag.reaptheflag.udpserver.network.UdpClient;
+import server.reaptheflag.reaptheflag.udpserver.network.UdpClientUser;
 import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdpDataPacket;
 import server.reaptheflag.reaptheflag.udpserver.validator.TokenValidator;
 import server.reaptheflag.reaptheflag.util.DateToolUtil;
@@ -31,12 +31,13 @@ public final class PacketDispatcher extends SimpleChannelInboundHandler<Datagram
         LOGGER.info("the current received data is:" + data + "\nat: " + DateToolUtil.logCurrentDate());
         LOGGER.info("the length of the data is: " + packet.getLength() + "bytes");
         LOGGER.info("the length of json is: " + data.length());
-        UdpClient udpClient = new UdpClient(packet);
-        if (!validator.isValidData(udpClient)) {
-            LOGGER.info("user: " + udpClient.getName() + " is trying to send invalid data ::: intercepted");
+        packet.loadContent();
+        UdpClientUser udpClientUser = new UdpClientUser(packet);
+        if (!validator.isValidData(udpClientUser)) {
+            LOGGER.info("user: " + udpClientUser.getName() + " is trying to send invalid data ::: intercepted");
             return;
         }
-        dispatcher.dispatch(this, udpClient);
+        dispatcher.dispatch(this, udpClientUser);
     }
 
     @Autowired
