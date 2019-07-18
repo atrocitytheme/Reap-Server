@@ -1,7 +1,7 @@
 package server.reaptheflag.reaptheflag.udpserver.dispatcher.marker;
 /**
  * This is the marker for supporting targeting the corresponding commmand
- * @see server.reaptheflag.reaptheflag.udpserver.Handler.BatchCommandRunner
+ * @see server.reaptheflag.reaptheflag.udpserver.Handler.commands.BatchCommandRunner
  * */
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -9,6 +9,7 @@ public class UdpClientUser extends NetworkUser{
     private ReceivableUdpDataPacket packet;
     public UdpClientUser(ReceivableUdpDataPacket packet) {
         this.packet = packet;
+        setTimeout(CONNECTION_MAX_TIMEOUT);
     }
     @Override
     public int commandType() {

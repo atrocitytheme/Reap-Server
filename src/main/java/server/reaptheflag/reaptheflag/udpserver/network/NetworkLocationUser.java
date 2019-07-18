@@ -14,9 +14,6 @@ public class NetworkLocationUser extends UdpClientUser{
 
     public OnlinePlayer generateModel() {
         OnlinePlayer model = new OnlinePlayer();
-
-
-
         return model;
     }
 }

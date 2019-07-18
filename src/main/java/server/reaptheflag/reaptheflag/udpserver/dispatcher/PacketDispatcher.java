@@ -37,6 +37,7 @@ public final class PacketDispatcher extends SimpleChannelInboundHandler<Datagram
             LOGGER.info("user: " + udpClientUser.getName() + " is trying to send invalid data ::: intercepted");
             return;
         }
+        udpClientUser.setTimeout(1000);
         dispatcher.dispatch(this, udpClientUser);
     }
 

@@ -8,6 +8,7 @@ public abstract class NetworkUser {
 
     private boolean disconnected = false; // must use this to check connection status
     private double timeout; // must use this to decrement the number
+    static final double CONNECTION_MAX_TIMEOUT = 1000;
 
     public abstract int commandType(); // -1 for default
     public abstract String getIp(); // null for default
