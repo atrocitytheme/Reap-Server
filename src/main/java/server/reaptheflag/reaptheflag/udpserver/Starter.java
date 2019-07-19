@@ -3,25 +3,27 @@ package server.reaptheflag.reaptheflag.udpserver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 import server.reaptheflag.reaptheflag.service.NetworkConditionChecker;
+import server.reaptheflag.reaptheflag.udpserver.server.Startable;
+import server.reaptheflag.reaptheflag.udpserver.server.UdpServer;
+
 /**
  * @see NetworkConditionChecker
  * udp server starter, with networkchecker involved
  * */
 
-public class UdpStarter implements Runnable{
-    private Logger LOGGER = LogManager.getLogger(UdpStarter.class);
+public class Starter implements Runnable{
+    private Logger LOGGER = LogManager.getLogger(Starter.class);
 
-    private UdpServer udpServer;
+    private Startable startableObj;
+
     @Autowired
     public void setNetworkConditionChecker(NetworkConditionChecker networkConditionChecker) {
         this.networkConditionChecker = networkConditionChecker;
     }
 
-    public UdpStarter(UdpServer server) {
-        this.udpServer = server;
+    public Starter(Startable server) {
+        this.startableObj = server;
     }
 
     private NetworkConditionChecker networkConditionChecker;
@@ -30,16 +32,11 @@ public class UdpStarter implements Runnable{
     public void run() {
         NetworkConditionChecker validator = networkConditionChecker;
         try {
-            udpServer.run();
+            startableObj.run();
         } catch (Exception e) {
-            LOGGER.info("udp server initialization failed!\n");
+            LOGGER.info("tcp/udp server initialization failed!\n");
             LOGGER.error(e);
             validator.setUdpCondition(false);
         }
-    }
-
-    @Autowired
-    public void setUdpServer(UdpServer udpServer) {
-        this.udpServer = udpServer;
     }
 }
