@@ -21,9 +21,9 @@ public class TcpConfiguration {
 
     @Bean
     @DependsOn({"tcpStarter"})
-    public CommandLineRunner scheduleTheTcp(TaskExecutor threadPool) {
+    public CommandLineRunner scheduleTheTcp(TaskExecutor simpleTask ) {
         return (String... args) -> {
-            threadPool.execute(tcpStarter);
+            simpleTask.execute(tcpStarter);
         };
     }
 
@@ -46,7 +46,7 @@ public class TcpConfiguration {
 
     @Autowired
     @Qualifier("tcpServer")
-    public void setUdpServer(TcpServer tcpServer) {
+    public void setTcpServer(TcpServer tcpServer) {
         this.tcpServer = tcpServer;
     }
 }

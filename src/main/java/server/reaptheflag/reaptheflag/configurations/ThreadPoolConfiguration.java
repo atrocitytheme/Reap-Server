@@ -8,10 +8,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @Configuration
 public class ThreadPoolConfiguration {
-    /*@Bean
-    public TaskExecutor UdpBeanExecutor() {
+    @Bean
+    public TaskExecutor simpleTask() {
         return new SimpleAsyncTaskExecutor();
-    }*/
+    }
 
     @Bean
     public TaskExecutor threadPool() {
