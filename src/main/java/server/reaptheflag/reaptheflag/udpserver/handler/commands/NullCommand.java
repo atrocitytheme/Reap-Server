@@ -1,10 +1,9 @@
-package server.reaptheflag.reaptheflag.udpserver.Handler.commands;
+package server.reaptheflag.reaptheflag.udpserver.handler.commands;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.udpserver.dispatcher.marker.CommandType;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkRoom;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 
 /**

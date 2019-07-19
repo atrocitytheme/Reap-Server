@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.udpserver.network.broadcast;
+package server.reaptheflag.reaptheflag.udpserver.network.manager.broadcast;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,18 +40,21 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
         InetAddress address = null;
         try {
             address = InetAddress.getByName(client.getIp());
-            LOGGER.info("sent to address succeeds! " + client.getIp());
         } catch (UnknownHostException e) {
             LOGGER.info("data sending stopped for: " + client);
             space.disconnect(client);
             return;
         }
+/*
         DatagramPacket packet = new DatagramPacket(sent, sent.length, address, client.getPort());
+*/
+        DatagramPacket packet = new DatagramPacket(sent, sent.length, client.rawAddress());
 
         try {
             socket.send(packet);
+            LOGGER.info("sent to address succeeds! " + client.rawAddress());
         } catch (IOException e) {
-            LOGGER.error("pipes broken!");
+            LOGGER.error("pipes broken!" + e);
         }
     }
 }

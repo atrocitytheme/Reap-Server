@@ -7,11 +7,14 @@ import io.netty.channel.socket.DatagramPacket;
 import server.reaptheflag.reaptheflag.udpserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.udpserver.network.receivable.parser.JsonFormatParser;
 import server.reaptheflag.reaptheflag.udpserver.util.DataWrapper;
+
+import java.net.InetSocketAddress;
+
 /**
  * mainly used for parse specific ReceivableUdpDataPacket from the client LiteNetLib
  * */
 public final class ReceivableUdpDataPacket {
-    private static int offset = 15;
+    private static int offset = 0;
     private DatagramPacket rawData;
     private JsonFormatParser<OnlinePlayer> parser;
     private boolean formatValid = true;
@@ -45,5 +48,9 @@ public final class ReceivableUdpDataPacket {
                 formatValid = false;
             }
         }
+    }
+
+    public InetSocketAddress senderInfo() {
+        return rawData.sender();
     }
 }

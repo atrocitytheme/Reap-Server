@@ -4,16 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-import server.reaptheflag.reaptheflag.udpserver.Handler.manager.BatchProcessFrame;
+import server.reaptheflag.reaptheflag.udpserver.network.manager.BatchProcessFrame;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 
 @Configuration
 @EnableScheduling
-public class BroadCasterConfiguration {
+public class FrameBroadCastConfigration {
     private BatchProcessFrame machine1;
     private NetworkSpace space;
     // frame synchronization
-    @Scheduled(cron = "0/2 * * * * *")
+    @Scheduled(cron = "* * * * * *")
     public void frameworkUpdate() {
         space.update();
         machine1.batchProcess(space);

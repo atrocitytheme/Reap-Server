@@ -3,12 +3,8 @@ package server.reaptheflag.reaptheflag.udpserver.dispatcher;
  * This is the dispatcher for different types of commands, it'll use differnet command to solve the request
  * TODO: add dispatcher of differenct commands
  * */
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import server.reaptheflag.reaptheflag.udpserver.Handler.commands.Command;
-import server.reaptheflag.reaptheflag.udpserver.Handler.commands.NullCommand;
-import server.reaptheflag.reaptheflag.udpserver.Handler.commands.PlayerMoveCommand;
+import server.reaptheflag.reaptheflag.udpserver.handler.commands.Command;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 

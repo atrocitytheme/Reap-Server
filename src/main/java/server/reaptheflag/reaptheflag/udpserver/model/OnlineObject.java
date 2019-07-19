@@ -4,19 +4,11 @@ import server.reaptheflag.reaptheflag.udpserver.model.scene.location.Location;
 import server.reaptheflag.reaptheflag.udpserver.model.scene.rotation.Rotation;
 
 public class OnlineObject {
-    String ip;
     int id;
     private int commandType;
     Location location;
     Rotation rotation;
 
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
     public int getId() {
         return id;
     }

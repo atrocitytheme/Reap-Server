@@ -2,6 +2,8 @@ package server.reaptheflag.reaptheflag.udpserver.network;
 
 import server.reaptheflag.reaptheflag.udpserver.network.sendable.SendableData;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.Objects;
 
 public abstract class NetworkUser {
@@ -17,14 +19,11 @@ public abstract class NetworkUser {
     public abstract int getRoom(); // -1 for default
     public abstract int getPort(); // 5000 for default
     public abstract int getId(); // default is -1
+    public abstract InetSocketAddress rawAddress();
 
     @Override
     public boolean equals(Object obj) {
-        Class<?> c = getClass();
-        Class<?> m = obj.getClass();
         if (!getClass().equals(obj.getClass())) return false;
-
-        if (obj == null) return false;
         NetworkUser user = (NetworkUser) obj;
         return this.getIp().equals(user.getIp()) &&
                 this.getName().equals(user.getName());
@@ -32,8 +31,7 @@ public abstract class NetworkUser {
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(getIp(), getName(), getRoom());
-        return result;
+        return  Objects.hash(getIp(), getName(), getRoom(), getPort());
     }
     // disconnect the user itself, when it's tcp, remember to override it to cut the tcp connection
     public void disconnect() {

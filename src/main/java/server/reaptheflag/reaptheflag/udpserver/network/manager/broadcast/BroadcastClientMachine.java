@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.udpserver.network.broadcast;
+package server.reaptheflag.reaptheflag.udpserver.network.manager.broadcast;
 
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.udpserver.network.sendable.SendableData;

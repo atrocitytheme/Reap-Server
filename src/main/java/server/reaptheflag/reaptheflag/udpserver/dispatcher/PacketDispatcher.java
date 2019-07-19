@@ -31,13 +31,15 @@ public final class PacketDispatcher extends SimpleChannelInboundHandler<Datagram
         LOGGER.info("the current received data is:" + data + "\nat: " + DateToolUtil.logCurrentDate());
         LOGGER.info("the length of the data is: " + packet.getLength() + "bytes");
         LOGGER.info("the length of json is: " + data.length());
+        LOGGER.info("from:: " + datagramPacket.sender().getAddress().getHostAddress());
         packet.loadContent();
         UdpClientUser udpClientUser = new UdpClientUser(packet);
         if (!validator.isValidData(udpClientUser)) {
             LOGGER.info("user: " + udpClientUser.getName() + " is trying to send invalid data ::: intercepted");
             return;
         }
-        udpClientUser.setTimeout(1000);
+
+        udpClientUser.setTimeout(5);
         dispatcher.dispatch(this, udpClientUser);
     }
 

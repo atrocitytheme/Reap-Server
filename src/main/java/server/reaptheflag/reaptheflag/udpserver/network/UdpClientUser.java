@@ -2,6 +2,9 @@ package server.reaptheflag.reaptheflag.udpserver.network;
 
 import server.reaptheflag.reaptheflag.udpserver.network.receivable.ReceivableUdpDataPacket;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+
 /**
  * UdpClientUser is the alias for the online player connection
  * */
@@ -17,7 +20,7 @@ public class UdpClientUser extends NetworkUser{
     }
     @Override
     public String getIp() {
-        return packet.content().getAttributeByName("Ip");
+        return packet.senderInfo().getAddress().getHostAddress();
     }
     @Override
     public String getToken() {
@@ -30,13 +33,17 @@ public class UdpClientUser extends NetworkUser{
     }
     @Override
     public int getPort() {
-        int port = packet.content().getIntByName("Port");
-        return port == 0 ? 5000 : port;
+        return packet.senderInfo().getPort();
     }
 
     @Override
     public int getId() {
         return this.packet.content().getIntByName("Id");
+    }
+
+    @Override
+    public InetSocketAddress rawAddress() {
+        return packet.senderInfo();
     }
 
     @Override

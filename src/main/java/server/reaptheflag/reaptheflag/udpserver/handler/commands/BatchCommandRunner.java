@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.udpserver.Handler.commands;
+package server.reaptheflag.reaptheflag.udpserver.handler.commands;
 /**
  * TODO: complete annotation-driven auto command dispatcher symbol
  * */

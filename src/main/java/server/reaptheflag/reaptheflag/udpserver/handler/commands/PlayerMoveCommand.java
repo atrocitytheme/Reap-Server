@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.udpserver.Handler.commands;
+package server.reaptheflag.reaptheflag.udpserver.handler.commands;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.udpserver.Handler.manager;
+package server.reaptheflag.reaptheflag.udpserver.network.manager;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.udpserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.udpserver.network.broadcast.BroadcastClientMachine;
+import server.reaptheflag.reaptheflag.udpserver.network.manager.broadcast.BroadcastClientMachine;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkRoom;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 import server.reaptheflag.reaptheflag.udpserver.network.sendable.SentDataPacketUdp;
 
-import java.sql.Connection;
 import java.util.Collection;
 import java.util.Set;
 /**

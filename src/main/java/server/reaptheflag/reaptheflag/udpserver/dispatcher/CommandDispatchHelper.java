@@ -1,9 +1,9 @@
 package server.reaptheflag.reaptheflag.udpserver.dispatcher;
 
 import org.springframework.stereotype.Component;
-import server.reaptheflag.reaptheflag.udpserver.Handler.commands.Command;
-import server.reaptheflag.reaptheflag.udpserver.Handler.commands.NullCommand;
-import server.reaptheflag.reaptheflag.udpserver.Handler.commands.PlayerMoveCommand;
+import server.reaptheflag.reaptheflag.udpserver.handler.commands.Command;
+import server.reaptheflag.reaptheflag.udpserver.handler.commands.NullCommand;
+import server.reaptheflag.reaptheflag.udpserver.handler.commands.PlayerMoveCommand;
 import server.reaptheflag.reaptheflag.udpserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.udpserver.network.rooms.NetworkSpace;
 

@@ -2,11 +2,17 @@ package server.reaptheflag.reaptheflag.udpserver.model.scene.location;
 
 public class Location {
 
-    WorldPoint point;
-    public Location (WorldPoint point) {
-        this.point = point;
+    WorldPoint location = new WorldPoint(.0, .0, .0);
+    public Location () {}
+    public Location (WorldPoint location) {
+        this.location = location;
     }
-    public void setPoint(WorldPoint point) {
-        this.point = point;
+
+    public WorldPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(WorldPoint location) {
+        this.location = location;
     }
 }
