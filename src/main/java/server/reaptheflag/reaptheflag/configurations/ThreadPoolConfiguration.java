@@ -15,6 +15,10 @@ public class ThreadPoolConfiguration {
 
     @Bean
     public TaskExecutor threadPool() {
-        return new ThreadPoolTaskExecutor();
+        ThreadPoolTaskExecutor exe = new ThreadPoolTaskExecutor();
+        exe.setCorePoolSize(5);
+        exe.setMaxPoolSize(10);
+        exe.setQueueCapacity(8);
+        return exe;
     }
 }

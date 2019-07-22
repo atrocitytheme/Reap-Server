@@ -7,25 +7,25 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
-import server.reaptheflag.reaptheflag.udpserver.server.TcpServer;
+import server.reaptheflag.reaptheflag.udpserver.server.Startable;
 import server.reaptheflag.reaptheflag.udpserver.server.UdpServer;
 import server.reaptheflag.reaptheflag.udpserver.Starter;
 
 @Configuration
+@Order(2)
 public class UdpConfiguration {
 
     private static int port = 9956;
+    @Autowired
+    private ApplicationContext ctx;
 
     private Starter starter;
-
-    private UdpServer udpServer;
-
-    private static Logger LOGGER = LogManager.getLogger(UdpConfiguration.class);
 
     @Bean
     @DependsOn({"udpStarter", "udpServer"})
@@ -36,28 +36,19 @@ public class UdpConfiguration {
     }
 
     @Bean
-    @Order(3)
+    @DependsOn({"udpServer"})
     public Starter udpStarter() {
-        return new Starter(udpServer);
+        return new Starter((Startable) ctx.getBean("udpServer"));
     }
 
     @Autowired
     @Qualifier("udpStarter")
-    @Order(4)
     public void setUdpStarter(Starter udpStarter) {
         this.starter = udpStarter;
     }
 
     @Bean
-    @Order(1)
     public UdpServer udpServer() {
         return new UdpServer(port);
-    }
-
-    @Autowired
-    @Qualifier("udpServer")
-    @Order(2)
-    public void setUdpServer(UdpServer udpServer) {
-        this.udpServer = udpServer;
     }
 }
