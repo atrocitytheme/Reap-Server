@@ -1,6 +1,7 @@
 package server.reaptheflag.reaptheflag.udpserver.server;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
@@ -40,9 +41,9 @@ public class TcpServer implements Startable{
         programBootStrap.group(boss, worker1).
                 channel(NioServerSocketChannel.class).
                 option(ChannelOption.SO_KEEPALIVE, true).handler(
-                        new ChannelInitializer<SocketChannel>() {
+                        new ChannelInitializer<Channel>() {
                             @Override
-                            protected void initChannel(SocketChannel socketChannel) {
+                            protected void initChannel(Channel socketChannel) {
 
                             }
                         }
@@ -52,13 +53,15 @@ public class TcpServer implements Startable{
 
                     @Override
                     protected void initChannel(SocketChannel nioDatagramChannel) {
-                        /*space1.allocateRoom();
+
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast("decoder", new ByteArrayDecoder());
                         pipe.addLast("encoder", new ByteArrayEncoder());
-                        pipe.addLast("clientHandler", handler);*/
+/*
+                        pipe.addLast("clientHandler", handler);
+*/
                     }
-                }); // packet handler is the bootstrap of the processing program
+                }).childOption(ChannelOption.SO_KEEPALIVE, true); // packet handler is the bootstrap of the processing program
 
         InetAddress address = InetAddress.getLocalHost();
         LOGGER.info("tcp server initialized!" + address);
