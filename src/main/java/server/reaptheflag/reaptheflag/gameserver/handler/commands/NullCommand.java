@@ -19,5 +19,6 @@ public class NullCommand implements Command{
     public void execute(NetworkUser client, NetworkSpace space) {
 
         LOGGER.info(client);
+        LOGGER.info("null command received!");
     }
 }

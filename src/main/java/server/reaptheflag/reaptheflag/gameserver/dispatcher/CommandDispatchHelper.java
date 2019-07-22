@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.Command;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.NullCommand;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.PlayerMoveCommand;
+import server.reaptheflag.reaptheflag.gameserver.handler.commands.SpawnPlayerCommand;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkSpace;
 
@@ -19,8 +20,8 @@ public class CommandDispatchHelper {
         }
 
         if (space.getRoom(user.getRoom()) == null) return new NullCommand();
-
-        if (!space.getRoom(user.getRoom()).contains(user) && user.commandType() != 1) {
+        // TODO: fix the detection bug here
+        if (!space.getRoom(user.getRoom()).contains(user) && user.commandType() != 0) {
             return new NullCommand();
         }
 
@@ -28,6 +29,10 @@ public class CommandDispatchHelper {
             return new PlayerMoveCommand();
         }
 
-        return new PlayerMoveCommand();
+        if (user.commandType() == 0 ) {
+            return new SpawnPlayerCommand();
+        }
+
+        return new NullCommand();
     }
 }

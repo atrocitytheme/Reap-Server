@@ -5,15 +5,12 @@ import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.location.Location;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.rotation.Rotation;
 import server.reaptheflag.reaptheflag.gameserver.network.receivable.ReceivableUdpDataPacket;
-/**
- * a higher level wrap of class to manipulate the network requests
- * */
-public class NetworkLocationUser extends UdpClientUser implements Configurable{
-    public NetworkLocationUser(ReceivableUdpDataPacket packet) {
+
+public class NetworkSpawnUser extends UdpClientUser implements Configurable {
+    public NetworkSpawnUser(ReceivableUdpDataPacket packet) {
         super(packet);
     }
-
-    public NetworkLocationUser(UdpClientUser user) {
+    public NetworkSpawnUser(UdpClientUser user) {
         super(user.getNetworkPacket());
         setTimeout(user.getTimeout());
     }
@@ -27,7 +24,7 @@ public class NetworkLocationUser extends UdpClientUser implements Configurable{
     @Override
     public void configureModel(OnlineObject obj) {
         OnlinePlayer model = (OnlinePlayer) obj;
-        model.setCommandType(1);
+        model.setCommandType(0);
         model.setId(getId());
         model.setLocation(new Location());
         model.setRotation(new Rotation());
