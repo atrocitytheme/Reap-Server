@@ -22,10 +22,10 @@ public class TcpConfiguration {
 
     @Bean
     @DependsOn({"tcpStarter", "tcpServer"})
-    public CommandLineRunner scheduleTheTcp(TaskExecutor threadPool ) {
-        Starter starter = tcpStarter = this.tcpStarter;
+    public CommandLineRunner scheduleTheTcp(TaskExecutor simpleTask ) {
+        Starter starter = this.tcpStarter;
         return (String... args) -> {
-            threadPool.execute(starter);
+            simpleTask.execute(starter);
         };
     }
 

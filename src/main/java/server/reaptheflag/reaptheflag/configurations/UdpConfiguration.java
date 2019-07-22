@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
 import server.reaptheflag.reaptheflag.udpserver.server.TcpServer;
 import server.reaptheflag.reaptheflag.udpserver.server.UdpServer;
@@ -35,24 +36,27 @@ public class UdpConfiguration {
     }
 
     @Bean
-    @DependsOn({"udpServer"})
+    @Order(3)
     public Starter udpStarter() {
         return new Starter(udpServer);
     }
 
     @Autowired
     @Qualifier("udpStarter")
+    @Order(4)
     public void setUdpStarter(Starter udpStarter) {
         this.starter = udpStarter;
     }
 
     @Bean
+    @Order(1)
     public UdpServer udpServer() {
         return new UdpServer(port);
     }
 
     @Autowired
     @Qualifier("udpServer")
+    @Order(2)
     public void setUdpServer(UdpServer udpServer) {
         this.udpServer = udpServer;
     }
