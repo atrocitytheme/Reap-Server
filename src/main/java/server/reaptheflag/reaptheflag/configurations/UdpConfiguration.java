@@ -2,8 +2,6 @@ package server.reaptheflag.reaptheflag.configurations;
 /**
  * This configuration is bassically for the Udp service when starting up
  * */
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -13,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
-import server.reaptheflag.reaptheflag.udpserver.server.Startable;
-import server.reaptheflag.reaptheflag.udpserver.server.UdpServer;
-import server.reaptheflag.reaptheflag.udpserver.Starter;
+import server.reaptheflag.reaptheflag.gameserver.server.Startable;
+import server.reaptheflag.reaptheflag.gameserver.server.UdpServer;
+import server.reaptheflag.reaptheflag.gameserver.Starter;
 
 @Configuration
 @Order(2)

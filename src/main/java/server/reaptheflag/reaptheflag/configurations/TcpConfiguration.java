@@ -7,11 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
-import server.reaptheflag.reaptheflag.udpserver.Starter;
-import server.reaptheflag.reaptheflag.udpserver.server.Startable;
-import server.reaptheflag.reaptheflag.udpserver.server.TcpServer;
+import server.reaptheflag.reaptheflag.gameserver.Starter;
+import server.reaptheflag.reaptheflag.gameserver.server.Startable;
+import server.reaptheflag.reaptheflag.gameserver.server.TcpServer;
 
 @Configuration
 public class TcpConfiguration {
