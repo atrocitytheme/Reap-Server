@@ -13,7 +13,7 @@ public class FrameBroadCastConfigration {
     private BatchProcessFrame machine1;
     private NetworkSpace space;
     // frame synchronization
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "0/2 * * * * *")
     public void frameworkUpdate() {
         space.update();
         machine1.batchProcess(space);

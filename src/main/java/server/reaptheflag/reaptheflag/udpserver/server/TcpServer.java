@@ -23,8 +23,6 @@ public class TcpServer implements Startable{
     private static Logger LOGGER = LogManager.getLogger(TcpServer.class);
     private int port;
     @Autowired
-    private PacketDispatcher handler;
-    @Autowired
     private NetworkSpace space1; // the network space of the room
     @Autowired
     private NioEventLoopGroup worker1;
@@ -54,16 +52,21 @@ public class TcpServer implements Startable{
 
                     @Override
                     protected void initChannel(SocketChannel nioDatagramChannel) {
-                        space1.allocateRoom();
+                        /*space1.allocateRoom();
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast("decoder", new ByteArrayDecoder());
                         pipe.addLast("encoder", new ByteArrayEncoder());
-                        pipe.addLast("clientHandler", handler);
+                        pipe.addLast("clientHandler", handler);*/
                     }
                 }); // packet handler is the bootstrap of the processing program
 
         InetAddress address = InetAddress.getLocalHost();
-        LOGGER.info("udp server initialized!" + address);
+        LOGGER.info("tcp server initialized!" + address);
         programBootStrap.bind(address, port).sync().channel().closeFuture().await();
+    }
+
+    @Override
+    public String getName() {
+        return "tcp";
     }
 }

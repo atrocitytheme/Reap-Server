@@ -2,15 +2,16 @@ package server.reaptheflag.reaptheflag.configurations;
 /**
  * This configuration is bassically for the Udp service when starting up
  * */
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
-import server.reaptheflag.reaptheflag.udpserver.server.Startable;
+import server.reaptheflag.reaptheflag.udpserver.server.TcpServer;
 import server.reaptheflag.reaptheflag.udpserver.server.UdpServer;
 import server.reaptheflag.reaptheflag.udpserver.Starter;
 
@@ -23,11 +24,13 @@ public class UdpConfiguration {
 
     private UdpServer udpServer;
 
+    private static Logger LOGGER = LogManager.getLogger(UdpConfiguration.class);
+
     @Bean
-    @DependsOn({"udpStarter"})
+    @DependsOn({"udpStarter", "udpServer"})
     public CommandLineRunner scheduleTheUdp(TaskExecutor threadPool) {
         return (String... args) -> {
-            threadPool.execute(starter);
+            threadPool.execute(this.starter);
         };
     }
 

@@ -15,7 +15,7 @@ import server.reaptheflag.reaptheflag.udpserver.server.UdpServer;
 public class Starter implements Runnable{
     private Logger LOGGER = LogManager.getLogger(Starter.class);
 
-    private Startable startableObj;
+    public Startable startableObj;
 
     @Autowired
     public void setNetworkConditionChecker(NetworkConditionChecker networkConditionChecker) {

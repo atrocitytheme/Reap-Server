@@ -52,4 +52,9 @@ public class UdpServer implements Startable{
         LOGGER.info("udp server initialized!" + address);
         programBootStrap.bind(address, port).sync().channel().closeFuture().await();
     }
+
+    @Override
+    public String getName() {
+        return "udp";
+    }
 }

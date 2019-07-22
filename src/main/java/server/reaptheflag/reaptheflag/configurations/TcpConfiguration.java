@@ -20,14 +20,14 @@ public class TcpConfiguration {
     private TcpServer tcpServer;
 
     @Bean
-    @DependsOn({"tcpStarter"})
-    public CommandLineRunner scheduleTheTcp(TaskExecutor simpleTask ) {
+    @DependsOn({"tcpStarter", "tcpServer"})
+    public CommandLineRunner scheduleTheTcp(TaskExecutor threadPool ) {
         return (String... args) -> {
-            simpleTask.execute(tcpStarter);
+            threadPool.execute(this.tcpStarter);
         };
     }
 
-    @Bean("tcpStarter")
+    @Bean()
     @DependsOn({"tcpServer"})
     public Starter tcpStarter() {
         return new Starter(tcpServer);
@@ -39,7 +39,7 @@ public class TcpConfiguration {
         this.tcpStarter = tcpStarter;
     }
 
-    @Bean("tcpServer")
+    @Bean()
     public TcpServer tcpServer() {
         return new TcpServer(port);
     }
