@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.gameserver.network.rooms;
+package server.reaptheflag.reaptheflag.gameserver.context.rooms;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

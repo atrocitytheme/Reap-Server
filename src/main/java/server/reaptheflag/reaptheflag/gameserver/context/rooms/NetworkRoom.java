@@ -1,12 +1,11 @@
-package server.reaptheflag.reaptheflag.gameserver.network.rooms;
+package server.reaptheflag.reaptheflag.gameserver.context.rooms;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class NetworkRoom {
@@ -20,6 +19,7 @@ public class NetworkRoom {
     }
     // update the status in the room
     public void update(NetworkUser user, OnlineObject model) {
+        data.remove(user);
         data.put(user, model);
     }
 
@@ -44,8 +44,20 @@ public class NetworkRoom {
         LOGGER.info("player : " + user + " has been spawned!");
         update(user, model);
     }
+
+    public OnlineObject getObjectById(String id) {
+        Optional<NetworkUser> user =  data.keySet().stream().filter((d)-> d.getId().equals(id)).findFirst();
+
+        if (!user.isPresent()) return null;
+
+        return data.get(user.get());
+    }
     
     public OnlineObject get(NetworkUser user) {
         return data.get(user);
+    }
+
+    public boolean checkId(NetworkUser user) {
+        return user.getId().equals(get(user).getId());
     }
 }

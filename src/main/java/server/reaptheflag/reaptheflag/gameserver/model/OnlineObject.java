@@ -9,6 +9,26 @@ public class OnlineObject {
     private Location location;
     private Rotation rotation;
 
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    private int roomId;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
+
     public String getId() {
         return id;
     }

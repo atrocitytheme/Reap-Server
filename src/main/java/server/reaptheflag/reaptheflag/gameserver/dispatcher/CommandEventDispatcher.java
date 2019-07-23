@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.udp.PacketDispatcher;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.Command;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
 
 public class CommandEventDispatcher implements Dispatchable{
 

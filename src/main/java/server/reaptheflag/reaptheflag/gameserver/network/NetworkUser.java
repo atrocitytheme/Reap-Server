@@ -20,7 +20,7 @@ public abstract class NetworkUser {
 
     @Override
     public boolean equals(Object obj) {
-        if (!getClass().equals(obj.getClass())) return false;
+        if (!(obj instanceof NetworkUser)) return false;
         NetworkUser user = (NetworkUser) obj;
         return this.getIp().equals(user.getIp()) &&
                 this.getName().equals(user.getName());
@@ -31,6 +31,10 @@ public abstract class NetworkUser {
         return  Objects.hash(getIp(), getName(), getRoom(), getPort());
     }
     // disconnect the user itself, when it's tcp, remember to override it to cut the tcp connection
+    @Override
+    public String toString() {
+        return " ip: " + getIp() + " Name: " + getName() + " timeout: " + getTimeout();
+    }
     public void disconnect() {
         disconnected = true;
     }

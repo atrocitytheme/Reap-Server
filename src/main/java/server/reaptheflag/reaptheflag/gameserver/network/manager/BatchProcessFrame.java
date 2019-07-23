@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.manager.broadcast.BroadcastClientMachine;
-import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SentDataPacketUdp;
 
 import java.util.Collection;
@@ -23,6 +23,7 @@ public class BatchProcessFrame {
     private BroadcastClientMachine broadcastMachine1;
 
     private TimeoutManager managerMacnhine1;
+
 
     private ConnectionManager connectionMachine1;
     private static Logger LOGGER = LogManager.getLogger(BatchProcessFrame.class);
@@ -39,7 +40,12 @@ public class BatchProcessFrame {
         Set<NetworkUser> allUsers = r.getAllUsers();
         SentDataPacketUdp data = new SentDataPacketUdp(obj);
         allUsers.parallelStream().forEach((u) -> {
+            // TODO: add a room processor bean in sequence
+            r.get(u).setToken("me");
+
             broadcastMachine1.broadCast(u, data);
+            r.get(u).setToken("othre");
+
             managerMacnhine1.manageTimeout(u);
             connectionMachine1.manageConnection(u);
         });

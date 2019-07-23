@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import server.reaptheflag.reaptheflag.gameserver.network.manager.BatchProcessFrame;
-import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
 
 @Configuration
 @EnableScheduling

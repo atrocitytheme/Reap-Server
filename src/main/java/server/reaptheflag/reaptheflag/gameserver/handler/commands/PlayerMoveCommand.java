@@ -6,8 +6,8 @@ import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkLocationUser;
 import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.network.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
 
 /**
  * TODO: make the broadcast of player movement
@@ -21,13 +21,6 @@ public class PlayerMoveCommand implements Command{
 
         OnlinePlayer model = user.generateModel();
         NetworkRoom room = space.getRoom(user.getRoom());
-
-        if (!room.contains(user)) {
-            room.addPlayer(user, model);
-        }
-
-        else {
-            room.update(user, model);
-        }
+        room.update(user, model);
     }
 }

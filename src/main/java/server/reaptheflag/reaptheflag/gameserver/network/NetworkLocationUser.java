@@ -29,6 +29,8 @@ public class NetworkLocationUser extends UdpClientUser implements Configurable{
         OnlinePlayer model = (OnlinePlayer) obj;
         model.setCommandType(1);
         model.setId(getId());
+        model.setRoomId(getRoom());
+        model.setToken("other");
         model.setLocation(new Location());
         model.setRotation(new Rotation());
     }

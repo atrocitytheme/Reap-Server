@@ -20,6 +20,7 @@ public final class ReceivableUdpDataPacket {
     private boolean formatValid = true;
     private ReceivableUdpDataPacket(DatagramPacket packet) {
         this.rawData = packet;
+        loadContent();
     }
     public static ReceivableUdpDataPacket wrap(DatagramPacket packet) {
         return new ReceivableUdpDataPacket(packet);
@@ -40,7 +41,7 @@ public final class ReceivableUdpDataPacket {
     /**
      * load the string content to the parser
      * */
-    public void loadContent() {
+    private void loadContent() {
         if (parser == null) {
             try {
                 parser = new JsonFormatParser<>(readString(), OnlinePlayer.class);
