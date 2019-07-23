@@ -4,6 +4,7 @@ public class Location {
 
     WorldPoint location = new WorldPoint(.0, .0, .0);
     public Location () {}
+
     public Location (WorldPoint location) {
         this.location = location;
     }

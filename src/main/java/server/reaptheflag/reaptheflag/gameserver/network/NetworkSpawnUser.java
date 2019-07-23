@@ -28,6 +28,8 @@ public class NetworkSpawnUser extends UdpClientUser implements Configurable {
         model.setId(getId());
         model.setRoomId(getRoom());
         model.setToken("other");
+        model.setPort(getPort());
+        model.setIp(getIp());
         model.setLocation(new Location());
         model.setRotation(new Rotation());
     }

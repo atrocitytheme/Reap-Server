@@ -34,10 +34,10 @@ public class CommandDispatchHelper {
             return new NullCommand();
         }
 
-        if (user.commandType() == 0 && space.getRoom(user.getRoom()).contains(user)) {
+       /* if (user.commandType() == 0 && space.getRoom(user.getRoom()).contains(user)) {
             LOGGER.info(user + " has already been spawned!");
             return new NullCommand();
-        }
+        }*/
 
         if (user.commandType() == 0 ) {
             return new SpawnPlayerCommand();

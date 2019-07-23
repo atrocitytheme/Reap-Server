@@ -3,11 +3,13 @@ package server.reaptheflag.reaptheflag.gameserver.model;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.location.Location;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.rotation.Rotation;
 
-public class OnlineObject {
+public class OnlineObject implements Cloneable{
     private String id;
     private int commandType;
     private Location location;
     private Rotation rotation;
+    private String ip;
+    private int port;
 
     public int getRoomId() {
         return roomId;
@@ -59,5 +61,26 @@ public class OnlineObject {
 
     public void setRotation(Rotation rotation) {
         this.rotation = rotation;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 }

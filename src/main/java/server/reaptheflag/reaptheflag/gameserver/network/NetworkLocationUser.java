@@ -31,6 +31,8 @@ public class NetworkLocationUser extends UdpClientUser implements Configurable{
         model.setId(getId());
         model.setRoomId(getRoom());
         model.setToken("other");
+        model.setIp(getIp());
+        model.setPort(getPort());
         model.setLocation(new Location());
         model.setRotation(new Rotation());
     }

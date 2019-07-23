@@ -10,9 +10,11 @@ import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.manager.broadcast.BroadcastClientMachine;
 import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
 import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.network.sendable.SafePacketSentData;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SentDataPacketUdp;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 /**
  * This is the frame for process the whole space in batch in frame updates
@@ -27,25 +29,40 @@ public class BatchProcessFrame {
 
     private ConnectionManager connectionMachine1;
     private static Logger LOGGER = LogManager.getLogger(BatchProcessFrame.class);
-
+    // batch process for all the scenes
     public void batchProcess(NetworkSpace space) {
         LOGGER.info("broadcasting... to the client");
         space.getAllRooms().parallelStream().forEach((r) -> {
-            this.fastProcess(r);
+            /*this.fastProcess(r);*/
+            this.safeProcess(r);
         });
     }
-    // quickly broadcast to all rooms
+
+    public void safeProcess(NetworkRoom r) {
+        Collection<? extends OnlineObject> obj = r.getAllObjects();
+        Set<NetworkUser> allUsers = r.getAllUsers();
+
+        allUsers.parallelStream().forEach((u) -> {
+            SafePacketSentData data = new SafePacketSentData(obj);
+            data.get(u).setToken("me");
+            broadcastMachine1.broadCast(u, data);
+            managerMacnhine1.manageTimeout(u);
+            connectionMachine1.manageConnection(u);
+        });
+
+    }
+    // quickly broadcast to all rooms without any verifcation, later used for rendering sceneObjects
+    // this method is unsafe
+    // TODO: make it stable
     public void fastProcess(NetworkRoom r) {
         Collection<? extends OnlineObject> obj = r.getAllObjects();
         Set<NetworkUser> allUsers = r.getAllUsers();
         SentDataPacketUdp data = new SentDataPacketUdp(obj);
         allUsers.parallelStream().forEach((u) -> {
             // TODO: add a room processor bean in sequence
-            r.get(u).setToken("me");
+            // TODO: since this is a multithread env, this requries token sync, implement this in somewhere else
 
             broadcastMachine1.broadCast(u, data);
-            r.get(u).setToken("othre");
-
             managerMacnhine1.manageTimeout(u);
             connectionMachine1.manageConnection(u);
         });

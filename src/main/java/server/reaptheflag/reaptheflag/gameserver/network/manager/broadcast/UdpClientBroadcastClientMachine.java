@@ -25,7 +25,7 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
     private NetworkSpace space;
 
     @Override
-    public void broadCast(NetworkUser client, SendableData data) {
+    public  void broadCast(NetworkUser client, SendableData data) {
         DatagramSocket socket = null;
         try {
             socket = new DatagramSocket();
@@ -35,7 +35,7 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
             space.disconnect(client);
             return;
         }
-        LOGGER.info("the sent data is: " + ((SentDataPacketUdp) data).deserilize());
+        LOGGER.info("the sent data is: " + data.deserilize());
         byte[] sent = data.getBytes();
         InetAddress address = null;
         try {

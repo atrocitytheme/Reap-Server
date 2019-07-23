@@ -12,20 +12,15 @@ import java.util.List;
  * */
 public class SentDataPacketUdp extends SendableData {
     private List<OnlineObject> dataCollection = new ArrayList<>();
-    private static <T extends OnlineObject> SentDataPacketUdp wrap(T obj) {
-        return new SentDataPacketUdp();
-    }
     public <T extends OnlineObject> void append(T onelineModel) {
         dataCollection.add(onelineModel);
     }
-
-    public SentDataPacketUdp(){}
     public <T extends OnlineObject> SentDataPacketUdp(Collection<T> models) {
         models.forEach((d) -> {
             append(d);
         });
     }
-
+    @Override
     public String deserilize() {
         return new JsonFormatConverter(dataCollection).convertToSendable();
     }
