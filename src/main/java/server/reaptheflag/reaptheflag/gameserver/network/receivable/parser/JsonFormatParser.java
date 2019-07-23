@@ -69,18 +69,26 @@ public class JsonFormatParser<E> extends DataFormatParser <String>{
     public E createSafeInstance() {
         return createInstanceUnsafe(target);
     }
-
-    private JsonElement getGsonElementByName(String name, JsonElement node) {
+    // for recursion
+    public JsonElement getGsonElementByName(String name, JsonElement node) {
         if (!node.isJsonObject()) {
             return null;
         }
         return node.getAsJsonObject().get(name);
     }
 
-    private JsonArray getGsonListByName(String name, JsonElement node) {
+    public JsonElement getGsonElementByName(String name) {
+        return getGsonElementByName(name, structure);
+    }
+
+    public JsonArray getGsonListByName(String name, JsonElement node) {
         if (!node.isJsonObject()) {
             return null;
         }
         return  node.getAsJsonObject().get(name).getAsJsonArray();
+    }
+
+    public <T> T castAttributeToObject(String name, Class<T> type) {
+        return gson.fromJson(getGsonElementByName(name), type);
     }
 }

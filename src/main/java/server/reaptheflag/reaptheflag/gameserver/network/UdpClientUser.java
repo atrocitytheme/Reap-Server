@@ -8,7 +8,7 @@ import java.net.InetSocketAddress;
  * UdpClientUser is the alias for the online player connection
  * */
 public class UdpClientUser extends NetworkUser{
-    private ReceivableUdpDataPacket packet;
+    protected ReceivableUdpDataPacket packet;
     public UdpClientUser(ReceivableUdpDataPacket packet) {
         this.packet = packet;
         setTimeout(CONNECTION_MAX_TIMEOUT);

@@ -9,6 +9,12 @@ import server.reaptheflag.reaptheflag.gameserver.network.receivable.ReceivableUd
  * a higher level wrap of class to manipulate the network requests
  * */
 public class NetworkLocationUser extends UdpClientUser implements Configurable{
+
+    public Location getLocation() {
+        Location loc = packet.content().castAttributeToObject("Location", Location.class);
+        return loc;
+    }
+
     public NetworkLocationUser(ReceivableUdpDataPacket packet) {
         super(packet);
     }
@@ -33,7 +39,7 @@ public class NetworkLocationUser extends UdpClientUser implements Configurable{
         model.setToken("other");
         model.setIp(getIp());
         model.setPort(getPort());
-        model.setLocation(new Location());
+        model.setLocation(getLocation());
         model.setRotation(new Rotation());
     }
 }
