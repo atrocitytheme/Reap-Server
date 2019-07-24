@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class NetworkSpace {
-    private AtomicInteger roomNum = new AtomicInteger(1);
+    private AtomicInteger roomNum = new AtomicInteger(0);
     private ConcurrentHashMap<Integer, NetworkRoom> rooms = new ConcurrentHashMap<>();
     private Logger LOGGER = LogManager.getLogger(NetworkSpace.class);
     public void allocateRoom() {
@@ -19,8 +19,12 @@ public class NetworkSpace {
     }
 
     private void addRoom(NetworkRoom room) {
-        rooms.put(roomNum.getAndIncrement(), room);
+        rooms.put(roomNum.incrementAndGet(), room);
         LOGGER.info("RoomId: " + (roomNum.get() - 1) + " created!");
+    }
+
+    public int getLatestRoomId() {
+        return roomNum.get();
     }
 
     public int totalRooms() {

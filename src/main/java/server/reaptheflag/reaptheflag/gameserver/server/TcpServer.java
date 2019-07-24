@@ -22,8 +22,6 @@ public class TcpServer implements Startable{
     private static Logger LOGGER = LogManager.getLogger(TcpServer.class);
     private int port;
     @Autowired
-    private NetworkSpace space1; // the network space of the room
-    @Autowired
     private NioEventLoopGroup worker1;
     @Autowired
     private NioEventLoopGroup boss;

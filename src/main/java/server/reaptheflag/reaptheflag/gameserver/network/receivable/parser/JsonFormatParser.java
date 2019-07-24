@@ -35,13 +35,29 @@ public class JsonFormatParser<E> extends DataFormatParser <String>{
         return ele == null ? "invalid" : ((ele.isJsonNull()) ? "null": ele.getAsString());
     }
 
+    public double getDoubleByName(String name, JsonElement ele) {
+        JsonElement dp = getGsonElementByName(name, ele);
+
+        return dp == null ? -1.0:dp.getAsDouble();
+    }
+
     @Override
     public int getIntByName(String name) {
         if (!structure.isJsonObject()) {
-            return 0;
+            return -1;
         }
         JsonElement ele = getGsonElementByName(name, structure);
         return ele == null ? -1 : (ele.isJsonNull() ? -1 : ele.getAsInt());
+    }
+
+    @Override
+    public double getDoubleByName(String name) {
+        if (!structure.isJsonObject()) {
+            return -1.0;
+        }
+        JsonElement ele = getGsonElementByName(name, structure);
+
+        return ele == null ? -1 : (ele.isJsonNull() ? -1 : ele.getAsDouble());
     }
 
     @Override
@@ -90,5 +106,9 @@ public class JsonFormatParser<E> extends DataFormatParser <String>{
 
     public <T> T castAttributeToObject(String name, Class<T> type) {
         return gson.fromJson(getGsonElementByName(name), type);
+    }
+
+    public <T> T castAttributeToObject(String name, JsonElement ele, Class<T> type) {
+        return gson.fromJson(getGsonElementByName(name, ele), type);
     }
 }

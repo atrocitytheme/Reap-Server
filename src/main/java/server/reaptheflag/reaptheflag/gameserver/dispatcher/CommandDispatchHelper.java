@@ -20,22 +20,12 @@ public class CommandDispatchHelper {
     public Command takeCommand(NetworkUser user, NetworkSpace space) {
         // if the input room is invalid
         if (space.getRoom(user.getRoom()) == null) {
-            LOGGER.info("The room doesn't exist!");
+            LOGGER.info(user + " is trying to join a room doesn't exist!");
             return new NullCommand();
         }
         // if not in this room
-        if (user.commandType() != 0 && !space.getRoom(user.getRoom()).contains(user)) {
-            LOGGER.info(user + "is not in this room");
-            return new NullCommand();
-        }
-        // if this goes without valid token
-        if (user.commandType() != 0 && !space.getRoom(user.getRoom()).checkId(user)) {
-            LOGGER.info("user: " + user + " is trying to hack this room " + user.getRoom());
-            return new NullCommand();
-        }
-
-        if (user.commandType() == 0 && space.getRoom(user.getRoom()).contains(user)) {
-            LOGGER.info(user + " has already been spawned!");
+        if (!space.getRoom(user.getRoom()).exists(user)) {
+            LOGGER.info(user + " want to hack into this room: " + user.getRoom());
             return new NullCommand();
         }
 

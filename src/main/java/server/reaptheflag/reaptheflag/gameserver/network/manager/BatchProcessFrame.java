@@ -14,7 +14,6 @@ import server.reaptheflag.reaptheflag.gameserver.network.sendable.SafePacketSent
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SentDataPacketUdp;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 /**
  * This is the frame for process the whole space in batch in frame updates
@@ -34,17 +33,17 @@ public class BatchProcessFrame {
         LOGGER.info("broadcasting... to the client");
         space.getAllRooms().parallelStream().forEach((r) -> {
             /*this.fastProcess(r);*/
-            this.safeProcess(r);
+            this.fastProcess(r);
         });
     }
 
+    @Deprecated
     public void safeProcess(NetworkRoom r) {
-        Collection<? extends OnlineObject> obj = r.getAllObjects();
-        Set<NetworkUser> allUsers = r.getAllUsers();
+        Collection<? extends OnlineObject> obj = r.getAllUdpObjects();
+        Set<NetworkUser> allUsers = r.getAllUdpUsers();
 
         allUsers.parallelStream().forEach((u) -> {
             SafePacketSentData data = new SafePacketSentData(obj);
-            data.get(u).setToken("me");
             broadcastMachine1.broadCast(u, data);
             managerMacnhine1.manageTimeout(u);
             connectionMachine1.manageConnection(u);
@@ -53,10 +52,9 @@ public class BatchProcessFrame {
     }
     // quickly broadcast to all rooms without any verifcation, later used for rendering sceneObjects
     // this method is unsafe
-    // TODO: make it stable
     public void fastProcess(NetworkRoom r) {
-        Collection<? extends OnlineObject> obj = r.getAllObjects();
-        Set<NetworkUser> allUsers = r.getAllUsers();
+        Collection<? extends OnlineObject> obj = r.getAllUdpObjects();
+        Set<NetworkUser> allUsers = r.getAllUdpUsers();
         SentDataPacketUdp data = new SentDataPacketUdp(obj);
         allUsers.parallelStream().forEach((u) -> {
             // TODO: add a room processor bean in sequence

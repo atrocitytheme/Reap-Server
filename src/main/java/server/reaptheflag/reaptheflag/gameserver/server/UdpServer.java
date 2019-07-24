@@ -24,9 +24,6 @@ public class UdpServer implements Startable{
     @Autowired
     private PacketDispatcher handler;
     @Autowired
-    private NetworkSpace space1; // the network space of the room
-
-    @Autowired
     private NioEventLoopGroup worker1;
     public UdpServer(int port) {
         this.port = port;
@@ -40,7 +37,6 @@ public class UdpServer implements Startable{
                 handler(new ChannelInitializer<NioDatagramChannel>() {
                     @Override
                     protected void initChannel(NioDatagramChannel nioDatagramChannel) throws Exception {
-                        space1.allocateRoom();
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast("decoder", new ByteArrayDecoder());
                         pipe.addLast("encoder", new ByteArrayEncoder());

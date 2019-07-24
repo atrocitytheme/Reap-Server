@@ -1,8 +1,12 @@
 package server.reaptheflag.reaptheflag.gameserver.model.scene.location;
 
-public class Location {
+import server.reaptheflag.reaptheflag.gameserver.model.scene.WorldPoint;
 
-    WorldPoint location = new WorldPoint(.0, .0, .0);
+import java.io.Serializable;
+
+public class Location implements Serializable {
+
+    WorldPoint location;
     public Location () {}
 
     public Location (WorldPoint location) {

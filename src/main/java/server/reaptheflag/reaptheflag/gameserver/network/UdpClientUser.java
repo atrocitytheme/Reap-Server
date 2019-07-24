@@ -46,6 +46,11 @@ public class UdpClientUser extends NetworkUser{
     }
 
     @Override
+    public String getPassword() {
+        return packet.content().getAttributeByName("Password");
+    }
+
+    @Override
     public int getRoom() {
         return packet.content().getIntByName("RoomId");
     }

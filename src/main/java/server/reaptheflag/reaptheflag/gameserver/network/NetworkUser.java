@@ -9,6 +9,8 @@ public abstract class NetworkUser {
     private double timeout; // must use this to decrement the number
     static final double CONNECTION_MAX_TIMEOUT = 5;
 
+    private boolean spawned = false;
+
     public abstract int commandType(); // -1 for default
     public abstract String getIp(); // null for default
     public abstract String getName(); // null for default
@@ -17,26 +19,34 @@ public abstract class NetworkUser {
     public abstract int getPort(); // 5000 for default
     public abstract String getId(); // default is -1
     public abstract InetSocketAddress rawAddress();
+    public abstract String getPassword();
 
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof NetworkUser)) return false;
         NetworkUser user = (NetworkUser) obj;
-        return this.getIp().equals(user.getIp()) &&
-                this.getName().equals(user.getName());
+        return this.getId().equals(user.getId());
     }
 
     @Override
     public int hashCode() {
-        return  Objects.hash(getIp(), getName(), getRoom(), getPort());
+        return  Objects.hash(getId());
     }
     // disconnect the user itself, when it's tcp, remember to override it to cut the tcp connection
     @Override
     public String toString() {
-        return " ip: " + getIp() + " Name: " + getName() + " timeout: " + getTimeout();
+        return " ip: " + getIp() + " Name: " + getName() + " timeout: " + getTimeout() + "id: " + getId();
     }
     public void disconnect() {
         disconnected = true;
+    }
+
+    public boolean isSpawned() {
+        return spawned;
+    }
+
+    public void setSpawned(boolean spawned) {
+        this.spawned = spawned;
     }
 
     public final boolean isDisconnected() {
