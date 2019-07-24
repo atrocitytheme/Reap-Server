@@ -30,14 +30,14 @@ public class CommandDispatchHelper {
         }
         // if this goes without valid token
         if (user.commandType() != 0 && !space.getRoom(user.getRoom()).checkId(user)) {
-            LOGGER.info("user: " + user + " is trying to hack this room" + user.getRoom());
+            LOGGER.info("user: " + user + " is trying to hack this room " + user.getRoom());
             return new NullCommand();
         }
 
-       /* if (user.commandType() == 0 && space.getRoom(user.getRoom()).contains(user)) {
+        if (user.commandType() == 0 && space.getRoom(user.getRoom()).contains(user)) {
             LOGGER.info(user + " has already been spawned!");
             return new NullCommand();
-        }*/
+        }
 
         if (user.commandType() == 0 ) {
             return new SpawnPlayerCommand();

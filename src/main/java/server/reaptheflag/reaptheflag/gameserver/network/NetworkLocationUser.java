@@ -26,7 +26,7 @@ public class NetworkLocationUser extends UdpClientUser implements Configurable{
 
     public OnlinePlayer generateModel() {
         OnlinePlayer model = new OnlinePlayer();
-        configureModel(model);
+        this.configureModel(model);
         return model;
     }
 

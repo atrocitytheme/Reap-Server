@@ -38,7 +38,7 @@ public final class PacketDispatcher extends SimpleChannelInboundHandler<Datagram
             LOGGER.info("ip: " + udpClientUser.getNetworkPacket().senderInfo() + " is trying to send invalid data");
             return;
         }
-        udpClientUser.setTimeout(20);
+        udpClientUser.setTimeout(1000);
         dispatcher.dispatch(this, udpClientUser);
     }
 
