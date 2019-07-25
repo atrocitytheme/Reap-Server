@@ -33,7 +33,7 @@ public class LoginController {
         if (ep != null) {
             if (!ep.getPassword().equals(player.getPassword())) {
                 res.setStatus(401);
-                return "login failed!";
+                return "Password not matched!";
             }
             res.setStatus(200);
         } else {
