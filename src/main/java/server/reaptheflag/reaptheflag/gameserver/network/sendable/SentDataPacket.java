@@ -10,12 +10,12 @@ import java.util.List;
 /**
  * Packet that's sent to the address, including: packet types, ip, data body
  * */
-public class SentDataPacketUdp extends SendableData {
+public class SentDataPacket extends SendableData {
     private List<OnlineObject> dataCollection = new ArrayList<>();
     public <T extends OnlineObject> void append(T onelineModel) {
         dataCollection.add(onelineModel);
     }
-    public <T extends OnlineObject> SentDataPacketUdp(Collection<T> models) {
+    public <T extends OnlineObject> SentDataPacket(Collection<T> models) {
         models.forEach((d) -> {
             append(d);
         });

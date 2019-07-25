@@ -11,6 +11,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import server.reaptheflag.reaptheflag.gameserver.dispatcher.ProtocalDetectable;
+import server.reaptheflag.reaptheflag.gameserver.dispatcher.ProtocalType;
 import server.reaptheflag.reaptheflag.gameserver.validator.impl.UdpUdpTokenChecker;
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.Dispatchable;
 import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
@@ -18,7 +20,7 @@ import server.reaptheflag.reaptheflag.gameserver.network.receivable.ReceivableUd
 import server.reaptheflag.reaptheflag.util.DateToolUtil;
 
 @Service
-public final class PacketDispatcher extends SimpleChannelInboundHandler<DatagramPacket> {
+public final class PacketDispatcher extends SimpleChannelInboundHandler<DatagramPacket> implements ProtocalDetectable {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private Dispatchable dispatcher;
@@ -51,5 +53,10 @@ public final class PacketDispatcher extends SimpleChannelInboundHandler<Datagram
     @Autowired
     public void setValidator(UdpUdpTokenChecker validator) {
         this.udpTokenChecker = validator;
+    }
+
+    @Override
+    public ProtocalType protocal() {
+        return ProtocalType.UDP;
     }
 }

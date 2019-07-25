@@ -1,6 +1,6 @@
-package server.reaptheflag.reaptheflag.gameserver.server;
+package server.reaptheflag.reaptheflag.gameserver.serverboot;
 /**
- * server initialization, use SO_BROADCAST udp channel
+ * serverboot initialization, use SO_BROADCAST udp channel
  * */
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -14,7 +14,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.udp.PacketDispatcher;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
 
 import java.net.InetAddress;
 
@@ -45,7 +44,7 @@ public class UdpServer implements Startable{
                 }); // packet handler is the bootstrap of the processing program
 
         InetAddress address = InetAddress.getLocalHost();
-        LOGGER.info("udp server initialized!" + address);
+        LOGGER.info("udp serverboot initialized!" + address);
         programBootStrap.bind(address, port).sync().channel().closeFuture().await();
     }
 

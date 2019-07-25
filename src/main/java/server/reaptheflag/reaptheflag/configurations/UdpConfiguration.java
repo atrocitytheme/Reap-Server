@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
-import server.reaptheflag.reaptheflag.gameserver.server.Startable;
-import server.reaptheflag.reaptheflag.gameserver.server.UdpServer;
+import server.reaptheflag.reaptheflag.gameserver.serverboot.Startable;
+import server.reaptheflag.reaptheflag.gameserver.serverboot.UdpServer;
 import server.reaptheflag.reaptheflag.gameserver.Starter;
 
 @Configuration

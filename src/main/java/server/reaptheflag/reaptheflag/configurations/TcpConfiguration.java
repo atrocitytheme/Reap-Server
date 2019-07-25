@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.task.TaskExecutor;
 import server.reaptheflag.reaptheflag.gameserver.Starter;
-import server.reaptheflag.reaptheflag.gameserver.server.Startable;
-import server.reaptheflag.reaptheflag.gameserver.server.TcpServer;
+import server.reaptheflag.reaptheflag.gameserver.serverboot.Startable;
+import server.reaptheflag.reaptheflag.gameserver.serverboot.TcpServer;
 
 @Configuration
 public class TcpConfiguration {

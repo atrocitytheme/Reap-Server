@@ -1,12 +1,14 @@
-package server.reaptheflag.reaptheflag.gameserver.network;
+package server.reaptheflag.reaptheflag.gameserver.network.udp;
 
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.location.Location;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.rotation.Rotation;
+import server.reaptheflag.reaptheflag.gameserver.network.Configurable;
+import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
 
-public class NetworkSpawnUser extends UdpClientUser implements Configurable {
-    public NetworkSpawnUser(UdpClientUser user) {
+public class SpawnUser extends UdpClientUser implements Configurable {
+    public SpawnUser(UdpClientUser user) {
         super(user.getNetworkPacket());
         setTimeout(user.getTimeout());
     }

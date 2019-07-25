@@ -4,7 +4,8 @@ package server.reaptheflag.reaptheflag.gameserver.dispatcher;
  * TODO: add dispatcher of differenct commands
  * */
 import org.springframework.beans.factory.annotation.Autowired;
-import server.reaptheflag.reaptheflag.gameserver.dispatcher.udp.PacketDispatcher;
+import server.reaptheflag.reaptheflag.gameserver.dispatcher.tcp.TcpCommandDispatcherHelper;
+import server.reaptheflag.reaptheflag.gameserver.dispatcher.udp.UdpCommandDispatchHelper;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.Command;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
@@ -13,10 +14,17 @@ public class CommandEventDispatcher implements Dispatchable{
 
     private NetworkSpace space1;
 
-    private CommandDispatchHelper helper;
-    public void dispatch(PacketDispatcher handler, NetworkUser client) {
-        Command command = helper.takeCommand(client, space1);
-        command.execute(client, space1);
+    private UdpCommandDispatchHelper udpHelper;
+
+    private TcpCommandDispatcherHelper tcpHelper;
+    public void dispatch(ProtocalDetectable handler, NetworkUser client) {
+        if (handler.protocal() == ProtocalType.UDP) {
+            Command command = udpHelper.takeCommand(client, space1);
+            command.execute(client, space1);
+        } else if (handler.protocal() == ProtocalType.TCP) {
+            Command command = tcpHelper.taleCommand(client, space1);
+            command.execute(client, space1);
+        } // other protocals
     }
 
     @Autowired
@@ -25,7 +33,12 @@ public class CommandEventDispatcher implements Dispatchable{
     }
 
     @Autowired
-    public void setHelper(CommandDispatchHelper helper) {
-        this.helper = helper;
+    public void setTcpHelper(TcpCommandDispatcherHelper tcpHelper) {
+        this.tcpHelper = tcpHelper;
+    }
+
+    @Autowired
+    public void setUdpHelper(UdpCommandDispatchHelper udpHelper) {
+        this.udpHelper = udpHelper;
     }
 }

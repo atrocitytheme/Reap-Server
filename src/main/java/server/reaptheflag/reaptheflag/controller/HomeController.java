@@ -13,7 +13,7 @@ public class HomeController {
     @RequestMapping("/")
     public String indexPage() {
         System.out.println(System.getProperty("java.class.path"));
-        return "Welcome to the game server";
+        return "Welcome to the game serverboot";
     }
 
 }

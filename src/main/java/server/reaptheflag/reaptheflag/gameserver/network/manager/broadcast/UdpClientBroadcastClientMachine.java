@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SendableData;
-import server.reaptheflag.reaptheflag.gameserver.network.sendable.SentDataPacketUdp;
 
 import java.io.IOException;
 import java.net.*;

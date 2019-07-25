@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("server.reaptheflag.reaptheflag.dao")
+@MapperScan("serverboot.reaptheflag.reaptheflag.dao")
 public class ReaptheflagApplication {
 
     public static void main(String[] args) {

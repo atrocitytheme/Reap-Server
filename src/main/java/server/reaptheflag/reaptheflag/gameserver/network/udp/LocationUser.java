@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.gameserver.network;
+package server.reaptheflag.reaptheflag.gameserver.network.udp;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -7,12 +7,15 @@ import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.WorldPoint;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.location.Location;
 import server.reaptheflag.reaptheflag.gameserver.model.scene.rotation.Rotation;
+import server.reaptheflag.reaptheflag.gameserver.network.Configurable;
+import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
 import server.reaptheflag.reaptheflag.gameserver.network.receivable.parser.JsonFormatParser;
 
 /**
- * a higher level wrap of class to manipulate the network requests
+ * a higher level wrap of class to manipulate different typees of network requests
+ * @see server.reaptheflag.reaptheflag.gameserver.handler.commands.Command
  * */
-public class NetworkLocationUser extends UdpClientUser implements Configurable{
+public class LocationUser extends UdpClientUser implements Configurable {
 
     public Location getLocation() {
         JsonFormatParser<OnlinePlayer> parser = packet.content();
@@ -41,7 +44,7 @@ public class NetworkLocationUser extends UdpClientUser implements Configurable{
         return pt;
     }
 
-    public NetworkLocationUser(UdpClientUser user) {
+    public LocationUser(UdpClientUser user) {
         super(user.getNetworkPacket());
         setTimeout(user.getTimeout());
     }

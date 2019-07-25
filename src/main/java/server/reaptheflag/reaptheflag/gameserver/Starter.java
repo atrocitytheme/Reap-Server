@@ -4,11 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import server.reaptheflag.reaptheflag.service.NetworkConditionChecker;
-import server.reaptheflag.reaptheflag.gameserver.server.Startable;
+import server.reaptheflag.reaptheflag.gameserver.serverboot.Startable;
 
 /**
  * @see NetworkConditionChecker
- * udp server starter, with networkchecker involved
+ * udp serverboot starter, with networkchecker involved
  * */
 
 public class Starter implements Runnable{
@@ -33,7 +33,7 @@ public class Starter implements Runnable{
         try {
             startableObj.run();
         } catch (Exception e) {
-            LOGGER.info("tcp/udp server initialization failed!\n");
+            LOGGER.info("tcp/udp serverboot initialization failed!\n");
             LOGGER.error(e);
             validator.setUdpCondition(false);
         }

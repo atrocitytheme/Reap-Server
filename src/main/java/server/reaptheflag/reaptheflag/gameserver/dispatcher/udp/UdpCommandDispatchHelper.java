@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.gameserver.dispatcher;
+package server.reaptheflag.reaptheflag.gameserver.dispatcher.udp;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,8 +15,8 @@ import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
  * */
 
 @Component
-public class CommandDispatchHelper {
-    private static Logger LOGGER = LogManager.getLogger(CommandDispatchHelper.class);
+public class UdpCommandDispatchHelper {
+    private static Logger LOGGER = LogManager.getLogger(UdpCommandDispatchHelper.class);
     public Command takeCommand(NetworkUser user, NetworkSpace space) {
         // if the input room is invalid
         if (space.getRoom(user.getRoom()) == null) {
