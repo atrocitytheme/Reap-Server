@@ -27,10 +27,8 @@ public class BatchProcessFrame {
 
 
     private ConnectionManager connectionMachine1;
-    private static Logger LOGGER = LogManager.getLogger(BatchProcessFrame.class);
     // batch process for all the scenes
     public void batchProcess(NetworkSpace space) {
-        LOGGER.info("broadcasting... to the client");
         space.getAllRooms().parallelStream().forEach((r) -> {
             /*this.fastProcess(r);*/
             this.fastProcess(r);
