@@ -34,7 +34,6 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
             space.disconnect(client);
             return;
         }
-        LOGGER.info("the sent data is: " + data.deserilize());
         byte[] sent = data.getBytes();
         InetAddress address = null;
         try {

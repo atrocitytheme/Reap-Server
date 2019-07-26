@@ -111,4 +111,11 @@ public class JsonFormatParser<E> extends DataFormatParser <String>{
     public <T> T castAttributeToObject(String name, JsonElement ele, Class<T> type) {
         return gson.fromJson(getGsonElementByName(name, ele), type);
     }
+
+    @Override
+    public boolean getBooleanByName(String name) {
+        JsonElement ele = getGsonElementByName(name);
+
+        return ele == null || ele.getAsBoolean();
+    }
 }

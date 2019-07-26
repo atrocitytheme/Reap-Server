@@ -65,5 +65,6 @@ public class LocationUser extends UdpClientUser implements Configurable {
         model.setPort(getPort());
         model.setLocation(getLocation());
         model.setRotation(getRotation());
+        model.setShooting(getShoot());
     }
 }

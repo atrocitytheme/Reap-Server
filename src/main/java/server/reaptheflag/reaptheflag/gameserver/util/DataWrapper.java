@@ -30,7 +30,7 @@ public class DataWrapper {
 
     public byte[] getBytes() {
         byte[] src = new byte[data.readableBytes()];
-        data.copy().readBytes(src);
+        data.copy().readBytes(src).release();
         return src;
     }
 

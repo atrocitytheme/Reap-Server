@@ -61,4 +61,6 @@ public class UdpClientUser extends NetworkUser{
     public ReceivableUdpDataPacket getNetworkPacket() {
         return packet;
     }
+
+    public boolean getShoot() {return packet.content().getBooleanByName("IsShooting");}
 }

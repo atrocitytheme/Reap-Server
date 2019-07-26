@@ -12,4 +12,5 @@ public abstract class DataFormatParser <E>{
     public abstract Iterable<String> getAttributeArray(String name);
     public abstract int getIntByName(String name);
     public abstract double getDoubleByName(String name);
+    public abstract boolean getBooleanByName(String name);
 }
