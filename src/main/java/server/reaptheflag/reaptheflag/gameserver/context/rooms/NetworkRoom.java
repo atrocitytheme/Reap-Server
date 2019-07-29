@@ -3,7 +3,11 @@ package server.reaptheflag.reaptheflag.gameserver.context.rooms;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
+import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
+import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
+import server.reaptheflag.reaptheflag.gameserver.network.TcpClientUser;
+import server.reaptheflag.reaptheflag.gameserver.validator.impl.TcpTokenChecker;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -11,9 +15,9 @@ import java.util.concurrent.ConcurrentHashMap;
 // invariant: udp, tcp should always be synced
 public class NetworkRoom {
     private static Logger LOGGER = LogManager.getLogger(NetworkRoom.class);
-    private Set<NetworkUser> basicPool = Collections.synchronizedSet(new HashSet<>());
-    private ConcurrentHashMap<NetworkUser, OnlineObject> udpData = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<NetworkUser, OnlineObject> tcpData = new ConcurrentHashMap<>();
+    protected Set<NetworkUser> basicPool = Collections.synchronizedSet(new HashSet<>());
+    protected ConcurrentHashMap<NetworkUser, OnlineObject> udpData = new ConcurrentHashMap<>();
+    protected ConcurrentHashMap<NetworkUser, OnlineObject> tcpData = new ConcurrentHashMap<>();
     /**
      * updateUdpInfo the status of a specific client
      * */
@@ -28,7 +32,14 @@ public class NetworkRoom {
 
     public void updateTcpInfo(NetworkUser user, OnlineObject model) {
         tcpData.remove(user);
-        tcpData.put(user, model);
+        if (!tcpConnected(user)) {
+            LOGGER.info("player " + user + " is removed from this room: " + user.getRoom());
+            // if connection broken for some reason
+            udpData.remove(user);
+            basicPool.remove(user);
+        } else {
+            tcpData.put(user, model);
+        }
     }
 
     public void exitPlayer(NetworkUser user) {
@@ -107,5 +118,19 @@ public class NetworkRoom {
         }
 
         return false;
+    }
+
+    protected boolean tcpConnected(NetworkUser user) {
+
+        TcpClientUser tcp = (TcpClientUser) user;
+
+        return tcp.getNetworkCondition().channel().isOpen();
+    }
+
+    public void finishGame() {
+        LOGGER.info("game finished!");
+    }
+    // broadcast to all other users except user
+    public void writeFrameToUser(NetworkUser user, KeyFrame obj) {
     }
 }

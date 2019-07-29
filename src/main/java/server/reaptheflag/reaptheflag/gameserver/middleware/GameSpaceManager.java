@@ -20,15 +20,15 @@ public class GameSpaceManager {
         this.space = space;
     }
 
-    public void createRoom() {
+    public void createRoom(int roomType) {
         if (space.getLatestRoomId() == 0) {
-            space.allocateRoom();
+            space.allocateRoom(roomType);
             return;
         }
         if (space.getRoom(space.getLatestRoomId()).totalPlayer() < MAX_NUM_OF_PLAYERS_IN_ONE_ROOM) {
             return;
         }
-        space.allocateRoom();
+        space.allocateRoom(roomType);
     }
 
     public void addUserToRoom(Player player, int roomId) {

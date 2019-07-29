@@ -2,6 +2,7 @@ package server.reaptheflag.reaptheflag.gameserver.context.rooms;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.modes.NormalRoom;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 
 import java.util.ArrayList;
@@ -13,8 +14,13 @@ public class NetworkSpace {
     private AtomicInteger roomNum = new AtomicInteger(0);
     private ConcurrentHashMap<Integer, NetworkRoom> rooms = new ConcurrentHashMap<>();
     private Logger LOGGER = LogManager.getLogger(NetworkSpace.class);
-    public void allocateRoom() {
-        NetworkRoom room = new NetworkRoom();
+    public void allocateRoom(int roomType) {
+        NetworkRoom room;
+        if (roomType == 1) {
+            room = new NormalRoom();
+        } else {
+            room = new NetworkRoom();
+        }
         addRoom(room);
     }
 

@@ -63,7 +63,7 @@ public class TcpClientUser extends NetworkUser{
 
     @Override
     public String getPassword() {
-        return null;
+        return this.packet.content().getAttributeByName("Password");
     }
 
     @Override

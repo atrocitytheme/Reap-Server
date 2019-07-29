@@ -36,7 +36,7 @@ public class UdpCommandDispatchHelper {
         if (user.commandType() == 1) {
             return new PlayerMoveCommand();
         }
-
+        // ob mode
         if (user.commandType() == 10) {
             return new PlayerMoveCommand();
         }

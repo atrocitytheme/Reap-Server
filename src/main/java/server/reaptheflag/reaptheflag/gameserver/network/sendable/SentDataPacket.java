@@ -20,6 +20,9 @@ public class SentDataPacket extends SendableData {
             append(d);
         });
     }
+    public <T extends OnlineObject> SentDataPacket(T model) {
+        append(model);
+    }
     @Override
     public String deserilize() {
         return new JsonFormatConverter(dataCollection).convertToSendable();

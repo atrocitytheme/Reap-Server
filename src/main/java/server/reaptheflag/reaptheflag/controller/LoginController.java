@@ -41,7 +41,7 @@ public class LoginController {
         }
 
         GameSpaceManager manager = GameSpaceManager.getManager(space);
-        manager.createRoom();
+        manager.createRoom(1);
         // register the room here
         int currentRoom = manager.getCurrentRoom();
         manager.addUserToRoom(player, currentRoom);

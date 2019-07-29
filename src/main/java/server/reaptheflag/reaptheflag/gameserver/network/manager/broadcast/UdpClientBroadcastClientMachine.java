@@ -50,7 +50,6 @@ public class UdpClientBroadcastClientMachine extends BroadcastClientMachine {
 
         try {
             socket.send(packet);
-            LOGGER.info("sent to address succeeds! " + client.rawAddress());
         } catch (IOException e) {
             LOGGER.error("pipes broken!" + e);
         }

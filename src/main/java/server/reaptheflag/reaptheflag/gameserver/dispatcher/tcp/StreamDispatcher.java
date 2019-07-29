@@ -28,8 +28,10 @@ public final class StreamDispatcher extends SimpleChannelInboundHandler<String> 
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) {
         LOGGER.info("tcp connection received: " + channelHandlerContext.channel().remoteAddress());
         TcpClientUser tcpUser = new TcpClientUser(s, channelHandlerContext);
+        LOGGER.info("the current received tcp data is: " + s);
         if (!checker.generalCheck(tcpUser)) {
             LOGGER.info(channelHandlerContext.channel().remoteAddress() + " is trying to send invalid data");
+            tcpUser.disconnect();
             return;
         }
         dispatcher.dispatch(this, tcpUser);
