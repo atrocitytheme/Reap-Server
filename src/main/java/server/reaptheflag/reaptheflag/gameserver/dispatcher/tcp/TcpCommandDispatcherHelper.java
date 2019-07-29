@@ -13,13 +13,19 @@ import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 public class TcpCommandDispatcherHelper {
     private static Logger LOGGER = LogManager.getLogger(TcpCommandDispatcherHelper.class);
     public Command taleCommand(NetworkUser user, NetworkSpace space) {
+
+        if (user.commandType() == 101) {
+            LOGGER.info(user.rawAddress() + " is testing this connection");
+            return new NullCommand();
+        }
+
         if (space.getRoom(user.getRoom()) == null) {
             LOGGER.info(user + "  invalid tcp command detected");
             return new DisconnectCommand();
         }
         // if not in this room
         if (!space.getRoom(user.getRoom()).exists(user)) {
-            LOGGER.info(user + " want to hack into this room with id: " + user.getRoom());
+            LOGGER.info(user + " tcp requests: want to hack into this room with id: " + user.getRoom());
             return new DisconnectCommand();
         }
 

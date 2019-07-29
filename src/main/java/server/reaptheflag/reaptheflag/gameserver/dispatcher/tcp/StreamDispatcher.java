@@ -11,6 +11,7 @@ import server.reaptheflag.reaptheflag.gameserver.dispatcher.CommandEventDispatch
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.ProtocalDetectable;
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.ProtocalType;
 import server.reaptheflag.reaptheflag.gameserver.network.TcpClientUser;
+import server.reaptheflag.reaptheflag.gameserver.validator.impl.TcpTokenChecker;
 
 @Service
 @ChannelHandler.Sharable
@@ -20,10 +21,17 @@ public final class StreamDispatcher extends SimpleChannelInboundHandler<String> 
 
     private CommandEventDispatcher dispatcher;
 
+    @Autowired
+    private TcpTokenChecker checker;
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) {
         LOGGER.info("tcp connection received: " + channelHandlerContext.channel().remoteAddress());
-        TcpClientUser tcpUser = new TcpClientUser(s);
+        TcpClientUser tcpUser = new TcpClientUser(s, channelHandlerContext);
+        if (!checker.generalCheck(tcpUser)) {
+            LOGGER.info(channelHandlerContext.channel().remoteAddress() + " is trying to send invalid data");
+            return;
+        }
         dispatcher.dispatch(this, tcpUser);
     }
 

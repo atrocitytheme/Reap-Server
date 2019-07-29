@@ -1,18 +1,29 @@
 package server.reaptheflag.reaptheflag.gameserver.network;
 
+import io.netty.channel.ChannelHandlerContext;
 import server.reaptheflag.reaptheflag.gameserver.network.receivable.ReceivableTcpDataPacket;
 
 import java.net.InetSocketAddress;
 
 public class TcpClientUser extends NetworkUser{
     protected ReceivableTcpDataPacket packet;
-    public TcpClientUser(String data) {
+    protected ChannelHandlerContext networkCondition;
+    public TcpClientUser(String data, ChannelHandlerContext ctx) {
         this.packet = new ReceivableTcpDataPacket(data);
+        this.networkCondition = ctx;
+    }
+
+    public ReceivableTcpDataPacket getNetworkPacket() {
+        return packet;
+    }
+
+    public ChannelHandlerContext getNetworkCondition() {
+        return networkCondition;
     }
 
     @Override
     public int commandType() {
-        return 0;
+        return this.packet.content().getIntByName("CommandType");
     }
 
     @Override
@@ -32,7 +43,7 @@ public class TcpClientUser extends NetworkUser{
 
     @Override
     public int getRoom() {
-        return 0;
+        return packet.content().getIntByName("RoomId");
     }
 
     @Override
@@ -42,12 +53,12 @@ public class TcpClientUser extends NetworkUser{
 
     @Override
     public String getId() {
-        return null;
+        return this.packet.content().getAttributeByName("Id");
     }
 
     @Override
     public InetSocketAddress rawAddress() {
-        return null;
+        return (InetSocketAddress) getNetworkCondition().channel().remoteAddress();
     }
 
     @Override
@@ -72,7 +83,7 @@ public class TcpClientUser extends NetworkUser{
 
     @Override
     public void disconnect() {
-        super.disconnect();
+        this.networkCondition.close();
     }
 
     @Override
