@@ -1,8 +1,14 @@
 package server.reaptheflag.reaptheflag.gameserver.network;
 
+import server.reaptheflag.reaptheflag.gameserver.network.receivable.ReceivableTcpDataPacket;
+
 import java.net.InetSocketAddress;
 
 public class TcpClientUser extends NetworkUser{
+    protected ReceivableTcpDataPacket packet;
+    public TcpClientUser(String data) {
+        this.packet = new ReceivableTcpDataPacket(data);
+    }
 
     @Override
     public int commandType() {

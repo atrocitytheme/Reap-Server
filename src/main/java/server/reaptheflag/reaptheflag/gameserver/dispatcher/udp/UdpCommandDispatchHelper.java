@@ -37,6 +37,10 @@ public class UdpCommandDispatchHelper {
             return new PlayerMoveCommand();
         }
 
+        if (user.commandType() == 10) {
+            return new PlayerMoveCommand();
+        }
+
         return new NullCommand();
     }
 }
