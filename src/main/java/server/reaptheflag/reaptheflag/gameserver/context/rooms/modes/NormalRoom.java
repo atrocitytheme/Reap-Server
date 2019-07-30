@@ -24,7 +24,6 @@ public class NormalRoom extends NetworkRoom {
     private Set<NetworkUser> diedPlayers = Collections.synchronizedSet(new HashSet<>());
     public void die(NetworkUser user) {
         diedPlayers.add(user);
-        udpData.remove(user); // no more udp sent to the user
     }
 
     public boolean isDead(NetworkUser user) {
