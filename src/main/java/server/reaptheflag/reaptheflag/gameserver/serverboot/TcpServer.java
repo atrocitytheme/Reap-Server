@@ -57,7 +57,7 @@ public class TcpServer implements Startable{
 
                         ChannelPipeline pipe = nioDatagramChannel.pipeline();
                         pipe.addLast("decoder", new StringDecoder(CharsetUtil.UTF_8));
-                        pipe.addLast("encoder", new StringEncoder(CharsetUtil.UTF_8));
+                        pipe.addLast("encoder", new ByteArrayEncoder()); // to give bytes to the client for later process
                         pipe.addLast("clientHandler", handler);
 
                     }

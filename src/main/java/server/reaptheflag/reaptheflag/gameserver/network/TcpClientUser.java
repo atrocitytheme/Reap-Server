@@ -28,7 +28,7 @@ public class TcpClientUser extends NetworkUser{
 
     @Override
     public String getIp() {
-        return null;
+        return networkCondition.channel().remoteAddress().toString();
     }
 
     @Override
@@ -67,18 +67,8 @@ public class TcpClientUser extends NetworkUser{
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
     public int hashCode() {
         return super.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
     @Override

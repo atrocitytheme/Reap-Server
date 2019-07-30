@@ -5,7 +5,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
 import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.*;
+import server.reaptheflag.reaptheflag.gameserver.handler.commands.normal.NormalRoomDieCommand;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 
 @Component
@@ -31,11 +33,15 @@ public class TcpCommandDispatcherHelper {
         }
 
         if (user.commandType() == 6) {
-            LOGGER.info("player dies!");
-            return new DieCommand();
+            if (space.getRoom(user.getRoom()).roomType() == RoomType.VOID) {
+                return new DieCommand();
+            }
+
+            if (space.getRoom(user.getRoom()).roomType() == RoomType.NORMAL) {
+                return new NormalRoomDieCommand();
+            }
         }
 
-        LOGGER.info("haha");
         return new NullCommand();
     }
 

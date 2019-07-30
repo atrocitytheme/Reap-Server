@@ -2,6 +2,7 @@ package server.reaptheflag.reaptheflag.gameserver.context.rooms;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import server.reaptheflag.reaptheflag.gameserver.context.rooms.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
@@ -47,6 +48,11 @@ public class NetworkRoom {
         basicPool.remove(user);
     }
 
+    public void clearSceneData(NetworkUser user) {
+        tcpData.remove(user);
+        udpData.remove(user);
+    }
+
     public void disconnect(NetworkUser user) {
         for (NetworkUser u:getAllUdpUsers()) {
             if (u.equals(user)) {
@@ -77,7 +83,7 @@ public class NetworkRoom {
     }
 
     public Set<NetworkUser> getAllTcpUsers() {
-        return udpData.keySet();
+        return tcpData.keySet();
     }
 
     @Deprecated
@@ -132,5 +138,9 @@ public class NetworkRoom {
     }
     // broadcast to all other users except user
     public void writeFrameToUser(NetworkUser user, KeyFrame obj) {
+    }
+
+    public RoomType roomType() {
+        return RoomType.VOID;
     }
 }

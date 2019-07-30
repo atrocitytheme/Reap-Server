@@ -13,8 +13,8 @@ public class ConnectionCommand implements Command {
          NetworkRoom room = space.getRoom(client.getRoom());
 
          //TODO: solve the update problem
-         room.updateTcpInfo(client, new OnlineObject());
-        TcpClientUser tcpUser = (TcpClientUser) client;
-        tcpUser.getNetworkCondition().writeAndFlush("test message");
+        room.updateTcpInfo(client, new OnlineObject());
+        /*TcpClientUser tcpUser = (TcpClientUser) client;
+        tcpUser.getNetworkCondition().writeAndFlush("test message");*/
     }
 }
