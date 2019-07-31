@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.gameserver.game.modes;
+package server.reaptheflag.reaptheflag.gameserver.game.modes.normal;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -8,7 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
 import server.reaptheflag.reaptheflag.gameserver.game.tpyes.RoomType;
+import server.reaptheflag.reaptheflag.gameserver.model.Alive;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
+import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.TcpClientUser;
@@ -32,9 +34,15 @@ public class NormalRoom extends NetworkRoom {
 
     @Override
     public void updateUdpInfo(NetworkUser user, OnlineObject model) {
-        if (!isDead(user)) {
-            super.updateUdpInfo(user, model);
+        OnlinePlayer playerModel = (OnlinePlayer) model;
+        if (isDead(user)) {
+            playerModel.setDead(true);
         }
+
+        else {
+            playerModel.setDead(false);
+        }
+        super.updateUdpInfo(user, model);
     }
 
     @Override
@@ -79,7 +87,7 @@ public class NormalRoom extends NetworkRoom {
         }
 
         catch (InterruptedException e) {
-            squeezeWithHead(user, length, data, retry);
+            squeezeWithHead(user, length, data, retry - 1);
         }
     }
     @Override
