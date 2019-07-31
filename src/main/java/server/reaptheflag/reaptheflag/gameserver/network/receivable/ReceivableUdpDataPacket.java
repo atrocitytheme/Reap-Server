@@ -8,6 +8,7 @@ import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.network.receivable.parser.JsonFormatParser;
 import server.reaptheflag.reaptheflag.gameserver.util.DataWrapper;
 
+import javax.xml.crypto.Data;
 import java.net.InetSocketAddress;
 
 /**
@@ -26,14 +27,20 @@ public final class ReceivableUdpDataPacket {
         return new ReceivableUdpDataPacket(packet);
     }
     public String readString() {
-        return DataWrapper.wrap(rawData).setReadableOffset(offset).convertToString();
+        DataWrapper wrap = DataWrapper.wrap(rawData);
+        String r =  wrap.setReadableOffset(offset).convertToString();
+        wrap.release(); // release the data since it's copied
+        return r;
     }
     public JsonFormatParser<OnlinePlayer> content() {
         loadContent();
         return parser;
     }
     public int getLength() {
-        return DataWrapper.wrap(rawData).setReadableOffset(offset).length();
+        DataWrapper wrap = DataWrapper.wrap(rawData);
+        int r = wrap.setReadableOffset(offset).length();
+        wrap.release();
+        return r;
     }
     public boolean isFormatValid() {
         return formatValid;

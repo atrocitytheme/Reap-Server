@@ -45,6 +45,10 @@ public class NetworkSpace {
         return rooms.get(id);
     }
 
+    public NetworkRoom getRoom(NetworkUser user) {
+        return getRoom(user.getRoom());
+    }
+
     /**
      * broadcast in every frame, eheck the connection and disable all disconnected
      */

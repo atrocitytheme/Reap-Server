@@ -13,10 +13,8 @@ import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
  * TODO: make the broadcast of player movement
  * */
 public class PlayerMoveCommand implements Command{
-    private static Logger LOGGER = LogManager.getLogger(PlayerMoveCommand.class);
     @Override
     public void execute(NetworkUser client, NetworkSpace space) {
-        LOGGER.info("playermove command exceeds!");
         LocationUser user = new LocationUser((UdpClientUser) client);
         OnlinePlayer model = user.generateModel();
         model.setId(user.getId());

@@ -24,6 +24,13 @@ import java.util.Set;
 public class NormalRoom extends NetworkRoom {
     private Logger LOGGER = LogManager.getLogger(NormalRoom.class);
     private Set<NetworkUser> diedPlayers = Collections.synchronizedSet(new HashSet<>());
+    public void exitPlayer(NetworkUser user) {
+        tcpData.remove(user);
+        udpData.remove(user);
+        basicPool.remove(user);
+        diedPlayers.remove(user);
+    }
+
     public void die(NetworkUser user) {
         diedPlayers.add(user);
     }

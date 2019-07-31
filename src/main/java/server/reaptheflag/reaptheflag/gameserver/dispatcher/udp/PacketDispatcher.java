@@ -32,10 +32,6 @@ public final class PacketDispatcher extends SimpleChannelInboundHandler<Datagram
         ReceivableUdpDataPacket packet = ReceivableUdpDataPacket.wrap(datagramPacket);
         String data = packet.readString();
         UdpClientUser udpClientUser = new UdpClientUser(packet);
-        LOGGER.info("the current received data is:" + data + "\nat: " + DateToolUtil.logCurrentDate());
-        LOGGER.info("the length of the data is: " + packet.getLength() + "bytes");
-        LOGGER.info("the length of json is: " + data.length());
-        LOGGER.info("from:: " + datagramPacket.sender().getAddress().getHostAddress());
         if (!udpTokenChecker.generalCheck(udpClientUser)) {
             LOGGER.info("ip: " + udpClientUser.getNetworkPacket().senderInfo() + " is trying to send invalid data");
             return;

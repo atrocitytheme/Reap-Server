@@ -59,4 +59,8 @@ public class DataWrapper {
     public int length() {
         return data.readableBytes();
     }
+
+    public void release() {
+        data.release();
+    }
 }
