@@ -13,6 +13,6 @@ public class DieCommand implements Command{
         KeyFrame frame = new KeyFrame();
         frame.setCommandType(6);
         frame.setTarget(client.getId());
-        room.writeFrameToUser(client, frame);
+        room.writeFrameToAllExcept(client, frame);
     }
 }

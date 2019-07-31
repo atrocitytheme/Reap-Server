@@ -7,6 +7,7 @@ import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.TcpClientUser;
+import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -135,7 +136,7 @@ public class NetworkRoom {
         LOGGER.info("game finished!");
     }
     // broadcast to all other users except user
-    public void writeFrameToUser(NetworkUser user, KeyFrame obj) {
+    public void writeFrameToAllExcept(NetworkUser user, KeyFrame obj) {
     }
 
     public RoomType roomType() {

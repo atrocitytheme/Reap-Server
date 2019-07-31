@@ -25,6 +25,7 @@ public class NormalRoom extends NetworkRoom {
     private Logger LOGGER = LogManager.getLogger(NormalRoom.class);
     private Set<NetworkUser> diedPlayers = Collections.synchronizedSet(new HashSet<>());
     public void exitPlayer(NetworkUser user) {
+
         tcpData.remove(user);
         udpData.remove(user);
         basicPool.remove(user);
@@ -53,7 +54,7 @@ public class NormalRoom extends NetworkRoom {
     }
 
     @Override
-    public void writeFrameToUser(NetworkUser user, KeyFrame data) {
+    public void writeFrameToAllExcept(NetworkUser user, KeyFrame data) {
         Set<NetworkUser> allUsers = getAllTcpUsers();
         TcpClientUser tcpClientUser = (TcpClientUser) user;
         LOGGER.info("writing to: " + tcpClientUser.getNetworkCondition().channel().remoteAddress());
