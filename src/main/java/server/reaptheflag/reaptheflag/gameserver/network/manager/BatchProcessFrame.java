@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.manager.broadcast.BroadcastClientMachine;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SafePacketSentData;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SentDataPacket;
 

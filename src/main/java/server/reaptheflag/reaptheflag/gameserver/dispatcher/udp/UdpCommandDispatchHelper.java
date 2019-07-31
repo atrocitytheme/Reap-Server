@@ -8,7 +8,7 @@ import server.reaptheflag.reaptheflag.gameserver.handler.commands.NullCommand;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.PlayerMoveCommand;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.SpawnPlayerCommand;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 
 /**
  * check which command to process for this player

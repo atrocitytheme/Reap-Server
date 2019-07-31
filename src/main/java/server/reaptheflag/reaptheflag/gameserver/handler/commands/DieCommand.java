@@ -1,7 +1,7 @@
 package server.reaptheflag.reaptheflag.gameserver.handler.commands;
 
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 

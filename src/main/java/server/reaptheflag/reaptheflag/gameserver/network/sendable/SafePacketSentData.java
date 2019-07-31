@@ -2,7 +2,6 @@ package server.reaptheflag.reaptheflag.gameserver.network.sendable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.converter.JsonFormatConverter;

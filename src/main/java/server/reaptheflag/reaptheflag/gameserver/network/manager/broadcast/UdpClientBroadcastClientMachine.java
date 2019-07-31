@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.network.sendable.SendableData;
 
 import java.io.IOException;

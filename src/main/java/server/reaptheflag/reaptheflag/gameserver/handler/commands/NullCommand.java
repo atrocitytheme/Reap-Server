@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.marker.CommandType;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 
 /**
  * This is a command of invalid usage

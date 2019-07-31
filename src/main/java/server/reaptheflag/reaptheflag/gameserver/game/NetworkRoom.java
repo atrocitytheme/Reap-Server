@@ -1,14 +1,12 @@
-package server.reaptheflag.reaptheflag.gameserver.context.rooms;
+package server.reaptheflag.reaptheflag.gameserver.game;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.tpyes.RoomType;
+import server.reaptheflag.reaptheflag.gameserver.game.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
-import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.TcpClientUser;
-import server.reaptheflag.reaptheflag.gameserver.validator.impl.TcpTokenChecker;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

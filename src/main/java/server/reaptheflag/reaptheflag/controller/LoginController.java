@@ -3,7 +3,7 @@ package server.reaptheflag.reaptheflag.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import server.reaptheflag.reaptheflag.dao.players.PlayerDao;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.middleware.GameSpaceManager;
 import server.reaptheflag.reaptheflag.model.Player;
 import server.reaptheflag.reaptheflag.util.DateToolUtil;

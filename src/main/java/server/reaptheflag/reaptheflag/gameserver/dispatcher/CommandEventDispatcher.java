@@ -8,7 +8,7 @@ import server.reaptheflag.reaptheflag.gameserver.dispatcher.tcp.TcpCommandDispat
 import server.reaptheflag.reaptheflag.gameserver.dispatcher.udp.UdpCommandDispatchHelper;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.Command;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 
 public class CommandEventDispatcher implements Dispatchable{
 

@@ -1,8 +1,8 @@
-package server.reaptheflag.reaptheflag.gameserver.context.rooms;
+package server.reaptheflag.reaptheflag.gameserver.game;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.modes.NormalRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.modes.NormalRoom;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 
 import java.util.ArrayList;

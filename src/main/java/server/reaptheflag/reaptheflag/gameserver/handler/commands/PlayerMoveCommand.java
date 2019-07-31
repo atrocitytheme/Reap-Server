@@ -6,8 +6,8 @@ import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.network.udp.LocationUser;
 import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 
 /**
  * TODO: make the broadcast of player movement

@@ -2,7 +2,7 @@ package server.reaptheflag.reaptheflag.gameserver.handler.commands;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 /**
  * tcp exclusive command, cut the KKEP-ALIVE connection of the user

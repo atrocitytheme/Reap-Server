@@ -1,7 +1,7 @@
 package server.reaptheflag.reaptheflag.gameserver.handler.commands.normal;
 
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.modes.NormalRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.modes.NormalRoom;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.DieCommand;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 

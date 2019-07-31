@@ -1,4 +1,4 @@
-package server.reaptheflag.reaptheflag.gameserver.context.rooms.modes;
+package server.reaptheflag.reaptheflag.gameserver.game.modes;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
@@ -6,8 +6,8 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.tpyes.RoomType;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;

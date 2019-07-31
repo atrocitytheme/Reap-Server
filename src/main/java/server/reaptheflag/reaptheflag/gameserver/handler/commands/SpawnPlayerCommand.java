@@ -8,8 +8,8 @@ import server.reaptheflag.reaptheflag.gameserver.model.scene.location.Location;
 import server.reaptheflag.reaptheflag.gameserver.network.udp.SpawnUser;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import server.reaptheflag.reaptheflag.gameserver.network.UdpClientUser;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkRoom;
-import server.reaptheflag.reaptheflag.gameserver.context.rooms.NetworkSpace;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
+import server.reaptheflag.reaptheflag.gameserver.game.NetworkSpace;
 
 public class SpawnPlayerCommand implements Command{
     private static Logger LOGGER = LogManager.getLogger(SpawnPlayerCommand.class);
