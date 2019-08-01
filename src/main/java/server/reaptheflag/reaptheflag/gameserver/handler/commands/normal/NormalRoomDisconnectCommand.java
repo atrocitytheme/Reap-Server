@@ -15,10 +15,6 @@ public class NormalRoomDisconnectCommand extends DisconnectCommand {
         LOGGER.info(client + " disconnect from the room: " + client.getRoom());
         super.execute(client, space);
         NormalRoom room = (NormalRoom) space.getRoom(client);
-        room.exitPlayer(client);
-        KeyFrame key = new KeyFrame();
-        key.setTarget(client.getId());
-        key.setCommandType(11);
-        room.writeFrameToAllExcept(client, key);
+        room.disconnect(client);
     }
 }

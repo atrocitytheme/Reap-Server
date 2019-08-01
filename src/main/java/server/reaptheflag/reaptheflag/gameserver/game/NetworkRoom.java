@@ -25,12 +25,8 @@ public class NetworkRoom {
     protected ConcurrentHashMap<NetworkUser, OnlineObject> udpData = new ConcurrentHashMap<>();
     protected ConcurrentHashMap<NetworkUser, OnlineObject> tcpData = new ConcurrentHashMap<>();
     protected int lastingTime = 120; // 2 minutes last for a room
-    /**
-     * updateUdpInfo the status of a specific client
-     * */
-    public void updateData(NetworkUser newClient) {
 
-    }
+
     // updateUdpInfo the status in the room
     public void updateUdpInfo(NetworkUser user, OnlineObject model) {
         udpData.remove(user);
@@ -48,9 +44,12 @@ public class NetworkRoom {
             tcpData.put(user, model);
         }
     }
-
+    /**
+     * Primitive player exit
+     * */
     public void exitPlayer(NetworkUser user) {
-        disconnect(user);
+        tcpData.remove(user);
+        udpData.remove(user);
         basicPool.remove(user);
     }
 

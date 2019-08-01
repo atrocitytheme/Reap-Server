@@ -9,6 +9,7 @@ import server.reaptheflag.reaptheflag.gameserver.game.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.BoardData;
+import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -17,13 +18,14 @@ public class NormalRoom extends NetworkRoom {
     private Logger LOGGER = LogManager.getLogger(NormalRoom.class);
     private Set<NetworkUser> diedPlayers = Collections.synchronizedSet(new HashSet<>());
     private ConcurrentHashMap<NetworkUser, NormalData> roomData = new ConcurrentHashMap<>();
+
+    @Override
     public void exitPlayer(NetworkUser user) {
 
-        tcpData.remove(user);
-        udpData.remove(user);
-        basicPool.remove(user);
+        super.exitPlayer(user);
         diedPlayers.remove(user);
         roomData.remove(user);
+        user.disconnect();
     }
 
     public void die(NetworkUser user, String trigger) {
@@ -33,6 +35,7 @@ public class NormalRoom extends NetworkRoom {
                 filter((d) -> d.getId().equals(trigger)).
                 findFirst();
         if (!dealer.isEmpty()) {
+            roomData.get(dealer.get()).setSendable(true);
             roomData.get(dealer.get()).addKill(user);
         }
     }
@@ -126,5 +129,20 @@ public class NormalRoom extends NetworkRoom {
         data.setCommandType(7);
         data.setRoomData(map);
         writeFrameToUser(user, data);
+    }
+
+    @Override
+    public void disconnect(NetworkUser user) {
+        KeyFrame key = new KeyFrame();
+        key.setTarget(user.getId());
+        key.setCommandType(11);
+
+        for (NetworkUser tcp: getAllTcpUsers()) {
+            if (tcp.equals(user)) {
+                writeFrameToAllExcept(tcp, key);
+            }
+        }
+
+        exitPlayer(user);
     }
 }

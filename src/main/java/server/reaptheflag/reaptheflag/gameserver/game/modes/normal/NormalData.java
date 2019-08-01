@@ -11,6 +11,22 @@ import java.util.concurrent.atomic.AtomicInteger;
 class NormalData {
     private final List<NetworkUser> killed = new ArrayList<>();
 
+    public boolean isSendable() {
+        return sendable;
+    }
+
+    public void setSendable(boolean sendable) {
+        this.sendable = sendable;
+    }
+
+    private boolean sendable = true;
+
+    public NormalData() {}
+
+    public NormalData(boolean sendable) {
+        this.sendable = sendable;
+    }
+
     public void addKill(NetworkUser other) {
         synchronized (killed) {
             killed.add(other);
