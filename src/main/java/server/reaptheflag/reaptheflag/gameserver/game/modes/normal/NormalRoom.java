@@ -2,8 +2,6 @@ package server.reaptheflag.reaptheflag.gameserver.game.modes.normal;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.reaptheflag.reaptheflag.gameserver.game.NetworkRoom;
@@ -11,12 +9,7 @@ import server.reaptheflag.reaptheflag.gameserver.game.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlineObject;
 import server.reaptheflag.reaptheflag.gameserver.model.OnlinePlayer;
 import server.reaptheflag.reaptheflag.gameserver.model.logic.BoardData;
-import server.reaptheflag.reaptheflag.gameserver.model.logic.KeyFrame;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
-import server.reaptheflag.reaptheflag.gameserver.network.TcpClientUser;
-import server.reaptheflag.reaptheflag.gameserver.network.sendable.converter.JsonFormatConverter;
-
-import java.io.ByteArrayOutputStream;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -30,6 +23,7 @@ public class NormalRoom extends NetworkRoom {
         udpData.remove(user);
         basicPool.remove(user);
         diedPlayers.remove(user);
+        roomData.remove(user);
     }
 
     public void die(NetworkUser user, String trigger) {
@@ -127,7 +121,7 @@ public class NormalRoom extends NetworkRoom {
         for ( Map.Entry<NetworkUser, NormalData> entry : roomData.entrySet()) {
             map.put(entry.getKey().getId(), entry.getValue().getKillCount());
         }
-        
+
         BoardData data = new BoardData();
         data.setCommandType(7);
         data.setRoomData(map);
