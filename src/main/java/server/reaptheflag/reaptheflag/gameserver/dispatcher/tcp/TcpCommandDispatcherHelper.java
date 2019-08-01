@@ -9,6 +9,7 @@ import server.reaptheflag.reaptheflag.gameserver.game.tpyes.RoomType;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.*;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.normal.NormalRoomDieCommand;
 import server.reaptheflag.reaptheflag.gameserver.handler.commands.normal.NormalRoomDisconnectCommand;
+import server.reaptheflag.reaptheflag.gameserver.handler.commands.normal.SpreadDataCommand;
 import server.reaptheflag.reaptheflag.gameserver.network.NetworkUser;
 
 @Component
@@ -40,6 +41,13 @@ public class TcpCommandDispatcherHelper {
 
             if (space.getRoom(user.getRoom()).roomType() == RoomType.NORMAL) {
                 return new NormalRoomDieCommand();
+            }
+        }
+
+        if (user.commandType() == 7) {
+
+            if (space.getRoom(user.getRoom()).roomType() == RoomType.NORMAL) {
+                return new SpreadDataCommand();
             }
         }
 

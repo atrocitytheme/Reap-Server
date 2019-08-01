@@ -67,11 +67,6 @@ public class TcpClientUser extends NetworkUser{
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
     public void disconnect() {
         this.networkCondition.close();
     }
@@ -84,5 +79,9 @@ public class TcpClientUser extends NetworkUser{
     @Override
     public void setSpawned(boolean spawned) {
         super.setSpawned(spawned);
+    }
+
+    public String getEventTrigger() {
+        return this.packet.content().getAttributeByName("EventTrigger");
     }
 }

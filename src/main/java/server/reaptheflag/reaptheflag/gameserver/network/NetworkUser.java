@@ -22,14 +22,14 @@ public abstract class NetworkUser {
     public abstract String getPassword();
 
     @Override
-    public boolean equals(Object obj) {
+    public final boolean equals(Object obj) {
         if (!(obj instanceof NetworkUser)) return false;
         NetworkUser user = (NetworkUser) obj;
         return this.getId().equals(user.getId());
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return  Objects.hash(getId());
     }
     // disconnect the user itself, when it's tcp, remember to override it to cut the tcp connection
