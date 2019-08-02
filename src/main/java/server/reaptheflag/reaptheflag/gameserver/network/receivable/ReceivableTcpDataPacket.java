@@ -11,7 +11,7 @@ public class ReceivableTcpDataPacket extends ReceivableDataPacket{
     public ReceivableTcpDataPacket(String data) {
         this.rawData = data;
         try {
-            this.parser = new JsonFormatParser<>(rawData, OnlinePlayer.class);
+            this.parser = new JsonFormatParser<>(rawData.trim(), OnlinePlayer.class);
         } catch (JsonSyntaxException e) {
             dataValid = false;
         }
