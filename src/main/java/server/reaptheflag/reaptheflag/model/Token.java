@@ -2,7 +2,7 @@ package server.reaptheflag.reaptheflag.model;
 
 public class Token {
     private String name;
-    private String ip;
+    private String id;
     private String token;
 
     public String getName() {
@@ -13,12 +13,12 @@ public class Token {
         this.name = name;
     }
 
-    public String getIp() {
-        return ip;
+    public String getId() {
+        return id;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getToken() {
