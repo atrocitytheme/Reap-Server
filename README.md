@@ -10,6 +10,8 @@ JDK 8+
 For tcp and udp protocal communication, sticky package of tcp solved in the client side.
 ## Springboot
 For http service and admin visible management, as well as bean management
+## mybatis
+For database registration and query, persistence layer for gui
 # Structures
 (To be posted)
 # Key Components
