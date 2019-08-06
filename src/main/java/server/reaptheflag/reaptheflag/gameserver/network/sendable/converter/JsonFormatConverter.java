@@ -15,6 +15,6 @@ public class JsonFormatConverter extends DataFormatConverter<String> {
 
     @Override
     public String convertToSendable() {
-        return data;
+        return data.trim();
     }
 }
