@@ -26,6 +26,7 @@ public class NetworkSpace {
 
     private void addRoom(NetworkRoom room) {
         rooms.put(roomNum.incrementAndGet(), room);
+        room.assignId(roomNum.get());
         LOGGER.info("RoomId: " + (roomNum.get() - 1) + " created!");
     }
 
@@ -49,14 +50,18 @@ public class NetworkSpace {
         return getRoom(user.getRoom());
     }
 
-    /**
-     * broadcast in every frame, eheck the connection and disable all disconnected
-     */
-    public void update() {
-
-    }
-
     public void disconnect(NetworkUser user) {
         rooms.get(user.getRoom()).disconnect(user);
+    }
+
+    private void removeRoom(int roomId) {
+        rooms.remove(roomId);
+        if (roomId == getLatestRoomId()) {
+            roomNum.incrementAndGet();
+        }
+    }
+
+    public void removeRoom(NetworkRoom room) {
+        removeRoom(room.getRoomId());
     }
 }

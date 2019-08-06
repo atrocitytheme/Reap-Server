@@ -25,6 +25,10 @@ public class GameSpaceManager {
             space.allocateRoom(roomType);
             return;
         }
+        if (space.getRoom(space.getLatestRoomId()) == null) {
+            space.allocateRoom(roomType);
+            return;
+        }
         if (space.getRoom(space.getLatestRoomId()).totalPlayer() < MAX_NUM_OF_PLAYERS_IN_ONE_ROOM) {
             return;
         }

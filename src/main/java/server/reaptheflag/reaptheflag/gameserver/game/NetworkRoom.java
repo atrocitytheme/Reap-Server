@@ -24,8 +24,21 @@ public class NetworkRoom {
     protected Set<NetworkUser> basicPool = Collections.synchronizedSet(new HashSet<>());
     protected ConcurrentHashMap<NetworkUser, OnlineObject> udpData = new ConcurrentHashMap<>();
     protected ConcurrentHashMap<NetworkUser, OnlineObject> tcpData = new ConcurrentHashMap<>();
-    protected int lastingTime = 120; // 2 minutes last for a room
+    protected int lastingTime = 10; // 5 minutes last for a room
+    private int roomId;
+    public NetworkRoom() {}
 
+    public int getRoomId() {
+        return roomId;
+    }
+
+    void assignId(int id) {
+        roomId = id;
+    }
+
+    public int getLastingTime() {
+        return lastingTime;
+    }
 
     // updateUdpInfo the status in the room
     public void updateUdpInfo(NetworkUser user, OnlineObject model) {
@@ -53,6 +66,7 @@ public class NetworkRoom {
         basicPool.remove(user);
     }
 
+    @Deprecated
     public void clearSceneData(NetworkUser user) {
         tcpData.remove(user);
         udpData.remove(user);
@@ -138,10 +152,10 @@ public class NetworkRoom {
         return tcp.getNetworkCondition().channel().isOpen();
     }
 
+    @Deprecated
     public void finishGame() {
         LOGGER.info("game finished!");
     }
-    // broadcast to all other users except user
 
     public RoomType roomType() {
         return RoomType.VOID;
@@ -193,7 +207,7 @@ public class NetworkRoom {
     /**
      * send a header first before sending the body with retry times
      * */
-    protected void squeezeWithHead(TcpClientUser user, int length, String data, int retry) {
+    private void squeezeWithHead(TcpClientUser user, int length, String data, int retry) {
         if (retry < 0) {
             return;
         }

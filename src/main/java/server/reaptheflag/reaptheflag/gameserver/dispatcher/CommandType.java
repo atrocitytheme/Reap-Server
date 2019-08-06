@@ -7,7 +7,9 @@ public enum CommandType {
     CONNECTION_TRY(101),
     SPAWN(0),
     MOVE(1),
-    OB(10);
+    OB(10),
+    FORCE_EXIT(2), // server exclusive
+    SYNC_TIME(3);// used exclusively by server
 
     private final int ord;
 
