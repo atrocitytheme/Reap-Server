@@ -44,7 +44,6 @@ public class GameSpaceManager {
     public int getCurrentRoom() {
         return space.getLatestRoomId();
     }
-
     NetworkSpace getRawSpace() {
         return space;
     }
