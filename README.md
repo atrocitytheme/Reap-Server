@@ -27,6 +27,7 @@ Run the jar in the Application folder with JVM parameter:
 ```
 -Xmx512m -Xms64m -XX:ParallelGCThreads=4
 ```
+
 # Memory Sample
 heap usage: 
 ![image](https://github.com/atrocitytheme/Reap-The-Flag-Server/blob/master/screenshots/Img/data.JPG)
