@@ -18,6 +18,11 @@ For database registration and query, persistence layer for gui
 # Key Components
 (To be posted)
 # How to Run with best scenario
+## prepare mysql database 8+ 
+1. prepare mysql database with UTC timezone, currently with root user (configured in application.properties)
+2. create a player schema
+3. create player table which corresponds to the entity in model package
+## run jar
 Run the jar in the Application folder with JVM parameter: 
 ```
 -Xmx512m -Xms64m -XX:ParallelGCThreads=4
